@@ -18,7 +18,6 @@ public:
     }
 
 private:
-    Game_ZHdl m_GameHdl;
     Bool m_UnkBool_0x2c;
     ObjectsGame_ZHdl m_ObjectsGameHdl;
 };

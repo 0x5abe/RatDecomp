@@ -1,7 +1,7 @@
 #ifndef _STATICARRAY_Z_H_
 #define _STATICARRAY_Z_H_
 
-#include <BitArray_Z.h>
+#include "DynArray_Z.h"
 
 template <class T, int ReservedSize, Bool DeleteObject = TRUE, Bool InitObject = TRUE>
 class StaticArray_Z {
