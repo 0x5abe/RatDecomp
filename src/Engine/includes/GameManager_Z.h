@@ -60,6 +60,10 @@ public:
         return m_GameHdls.GetSize();
     }
 
+    inline Game_ZHdl& GetGame(int i_GameId) {
+        return m_GameHdls[i_GameId];
+    }
+
     inline void EndPause() {
         m_IsPaused = FALSE;
     }

@@ -3,6 +3,7 @@
 #include "Object_Z.h"
 #include "Node_ZHdl.h"
 #include "MatrixCache_Z.h"
+#include "Occluder_ZHdl.h"
 
 struct FrustrumPlane_Z {
     Vec4f m_PlaneNormals[6]; // plane normals - left,right,bottom,top,near,far I think
@@ -81,6 +82,9 @@ public:
     virtual void EndLoad();
     virtual void Draw(DrawInfo_Z& i_DrawInfo, ObjectDatas_Z* i_Data);
     virtual void UpdateObject(Node_Z* a1, ObjectDatas_Z* a2);
+
+    void DoOcclusion(const Occluder_ZHdl& i_OccluderHdl);
+    void NoOcclusion();
 
     static BaseObject_Z* NewObject() { return NewL_Z(188) Camera_Z; }
 

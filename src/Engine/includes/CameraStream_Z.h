@@ -5,7 +5,9 @@
 class CameraStream_Z : public Manipulator_Z {
 public:
     virtual void Init();
-    virtual ~CameraStream_Z();
+
+    virtual ~CameraStream_Z() { }
+
     virtual void Update(Float i_DeltaTime);
 
     static BaseObject_Z* NewObject() {

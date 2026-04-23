@@ -835,7 +835,7 @@ config.libs = [
             Object(NonMatching, "Engine/InGameObjectsDraw_Z.cpp"),
             Object(NonMatching, "Engine/ObjectGame_Z.cpp"),
             Object(NonMatching, "Engine/LightLoad_Z.cpp"),
-            Object(NonMatching, "Engine/CameraOccluder_Z.cpp"),
+            Object(Matching,    "Engine/CameraOccluder_Z.cpp"),
             Object(NonMatching, "Engine/SequenceMixAnim_Z.cpp"),
             Object(NonMatching, "Engine/SubLevelVolumeAgent_Z.cpp"),
             Object(NonMatching, "Engine/Tree_Z.cpp"),

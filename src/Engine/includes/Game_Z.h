@@ -41,10 +41,14 @@ public:
     U32 GetNbVp() const;
     void SetGameWorld(const World_ZHdl& i_WorldHdl, const Char* i_GameName);
     void Update(Float i_DeltaTime);
-    void Stream(const Vec3f& i_Pos, Agent_ZHdl i_NotifyAgent, abc_message i_Msg);
+    void Stream(const Vec3f& i_Pos, Agent_ZHdl i_NotifyAgent, abc_message i_Msg = msg_no_message);
     void SetGamePlayerNb(S32 i_Nb, Bool i_IsMono, const Name_Z& i_CameraAgentClass);
     S32 GetSubId(S32 i_SubDataId, S32 i_Unk);
     void AddSubLevel(const SubWorld_ZHdl& i_SubWorldHdl, S32 i_SubLevelId);
+
+    const World_ZHdl& GetWorld() const {
+        return m_WorldHdl;
+    }
 
 private:
     World_ZHdl m_WorldHdl;

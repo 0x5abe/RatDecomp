@@ -4,7 +4,8 @@
 
 class CameraOccluder_Z : public Manipulator_Z {
 public:
-    virtual ~CameraOccluder_Z();
+    virtual ~CameraOccluder_Z() { }
+
     virtual void Init();
     virtual void Update(Float i_DeltaTime);
 
