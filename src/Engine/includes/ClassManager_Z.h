@@ -119,8 +119,8 @@ private:
     Bool m_BfOpened;
     HashTableBase_Z<S32Hash_Z> m_ObjectNameToStringIndex;
     DynArray_Z<String_Z<ARRAY_CHAR_MAX>, 16> m_ObjectNameStrings;
-    String_Z<ARRAY_CHAR_MAX> m_BfHeader;
-    String_Z<ARRAY_CHAR_MAX> m_BfVersion;
+    String_Z<ARRAY_CHAR_MAX> m_BfHeaderText; // Includes version
+    String_Z<ARRAY_CHAR_MAX> m_BfVersion; // Just version
 };
 
 #endif

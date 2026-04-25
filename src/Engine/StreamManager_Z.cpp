@@ -60,7 +60,7 @@ BaseStream_Z& BaseStream_Z::operator=(const BaseStream_Z& i_Other) {
     return *this;
 }
 
-Bool StreamManager_Z::Read(void* i_Buffer, S32 i_StartOfBlock, S32 i_BlockSize, BaseStream_Z* i_Stream, S32 i_UserDefined) {
+Bool StreamManager_Z::Read(void* i_Buffer, S32 i_StartOffset, S32 i_BytesToRead, BaseStream_Z* i_Stream, S32 i_UserDefined) {
     SharedResourceGuard_Z l_StreamLock(m_StreamMutex);
 
     if (i_Stream->GetID().Ref.m_ReadId == -1) {
@@ -100,10 +100,10 @@ Bool StreamManager_Z::Read(void* i_Buffer, S32 i_StartOfBlock, S32 i_BlockSize, 
     l_ReadOp.m_StreamID.Ref.m_StreamId = l_OpenId;
     l_ReadOp.m_StreamID.Ref.m_ReadId = l_ReadId;
     l_ReadOp.m_Buffer = (Char*)i_Buffer;
-    l_ReadOp.m_StartOfBlock = (Char*)i_StartOfBlock;
-    l_ReadOp.m_BlockSize = i_BlockSize;
+    l_ReadOp.m_StartOffset = (Char*)i_StartOffset;
+    l_ReadOp.m_BytesToRead = i_BytesToRead;
     l_ReadOp.m_UserDefined = i_UserDefined;
-    l_ReadOp.m_OffsetInBlock = 0;
+    l_ReadOp.m_BytesRead = 0;
     l_ReadOp.m_Stream = i_Stream;
 
     return TRUE;
@@ -177,7 +177,7 @@ Bool StreamManager_Z::Heartbeat(Float i_DeltaTime) {
         ReadOp& l_ReadOp = m_ReadOps[i];
         if (l_ReadOp.m_Status == ReadOp::Readed) {
             l_ReadOp.m_Status = ReadOp::Finished;
-            l_ReadOp.m_Stream->StreamReaded(l_ReadOp.m_BlockSize, l_ReadOp.m_UserDefined);
+            l_ReadOp.m_Stream->StreamReaded(l_ReadOp.m_BytesToRead, l_ReadOp.m_UserDefined);
         }
         else if (l_ReadOp.m_Status == ReadOp::Failed) {
             l_ReadOp.m_Status = ReadOp::Start;
@@ -300,15 +300,15 @@ void StreamManager_Z::Thread() {
         S16 l_OpenId = l_ReadOp->GetStreamID().Ref.m_StreamId;
         OpenOp* l_Open = &m_OpenOps[l_OpenId];
 
-        S32 l_ReadSize = Min((S32)STR_MAX_READ_SIZE, l_ReadOp->m_BlockSize - l_ReadOp->m_OffsetInBlock);
+        S32 l_ReadSize = Min((S32)STR_MAX_READ_SIZE, l_ReadOp->m_BytesToRead - l_ReadOp->m_BytesRead);
 
         {
             SharedResourceGuard_Z l_ReadLock(m_ReadMutex);
 
-            S32 l_SeekPos = (S32)l_ReadOp->m_StartOfBlock + l_ReadOp->m_OffsetInBlock;
+            S32 l_SeekPos = (S32)l_ReadOp->m_StartOffset + l_ReadOp->m_BytesRead;
 
-            if ((S32)l_Open->m_FileHdl.Seek(l_SeekPos, FILE_SEEK_START) == (S32)l_ReadOp->m_StartOfBlock + l_ReadOp->m_OffsetInBlock) {
-                l_Open->m_FileHdl.Read(l_ReadOp->m_Buffer + l_ReadOp->m_OffsetInBlock, l_ReadSize);
+            if ((S32)l_Open->m_FileHdl.Seek(l_SeekPos, FILE_SEEK_START) == (S32)l_ReadOp->m_StartOffset + l_ReadOp->m_BytesRead) {
+                l_Open->m_FileHdl.Read(l_ReadOp->m_Buffer + l_ReadOp->m_BytesRead, l_ReadSize);
             }
 
             LastError = l_Open->m_FileHdl.GetLastError();
@@ -318,8 +318,8 @@ void StreamManager_Z::Thread() {
 
         if (l_ReadOp->m_Status == ReadOp::Start) {
             if (LastError == STR_ERROR_NONE) {
-                l_ReadOp->m_OffsetInBlock = l_ReadOp->m_OffsetInBlock + l_ReadSize;
-                if (l_ReadOp->m_OffsetInBlock == l_ReadOp->m_BlockSize) {
+                l_ReadOp->m_BytesRead = l_ReadOp->m_BytesRead + l_ReadSize;
+                if (l_ReadOp->m_BytesRead == l_ReadOp->m_BytesToRead) {
                     l_ReadOp->m_Status = ReadOp::Readed;
                 }
             }

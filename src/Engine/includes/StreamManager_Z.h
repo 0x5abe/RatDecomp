@@ -77,9 +77,9 @@ public:
         StreamID m_StreamID;
         S32 m_UserDefined;
         Char* m_Buffer;
-        Char* m_StartOfBlock;
-        S32 m_BlockSize;
-        S32 m_OffsetInBlock;
+        Char* m_StartOffset;
+        S32 m_BytesToRead;
+        S32 m_BytesRead;
         BaseStream_Z* m_Stream;
     };
 
@@ -91,7 +91,7 @@ public:
     static void* ThreadProcVoid(void* i_Param);
 
     Bool Open(const Char* i_FilePath, BaseStream_Z* i_Stream, void* i_UnkPtr_0x160, S32 i_UnkS32_0x164, S32 i_UserDefined);
-    Bool Read(void* i_Buffer, S32 i_StartOfBlock, S32 i_BlockSize, BaseStream_Z* i_Stream, S32 i_UserDefined);
+    Bool Read(void* i_Buffer, S32 i_StartOffset, S32 i_BytesToRead, BaseStream_Z* i_Stream, S32 i_UserDefined);
     Bool Close(BaseStream_Z* i_Stream, Bool i_CloseAllReadsForFile);
 
     S32 GetLastError() {

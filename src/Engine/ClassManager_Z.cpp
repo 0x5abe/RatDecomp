@@ -33,8 +33,8 @@ ClassManager_Z::ClassManager_Z() {
     m_BfNameExtension.StrCpy(BIGFILE_NAME_EXTENSION);
     m_BfStreamExtension.StrCpy(BIGFILE_STREAM_EXTENSION);
     m_BfVersion.Sprintf(BIGFILE_VERSION_STRING, User_BFVersion, BIGFILE_PATCH_VERSION, BIGFILE_PLATFORM_VERSION);
-    m_BfHeader.StrCpy(m_BfVersion);
-    m_BfHeader.StrCat(BIGFILE_VERSION_COPYRIGHT);
+    m_BfHeaderText.StrCpy(m_BfVersion);
+    m_BfHeaderText.StrCat(BIGFILE_VERSION_COPYRIGHT);
 }
 
 ClassManager_Z::~ClassManager_Z() {

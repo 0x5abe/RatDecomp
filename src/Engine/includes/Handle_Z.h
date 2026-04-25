@@ -103,7 +103,12 @@ protected:
 struct HandleRec_Z {
     enum {
         NONE = 0,
-        RSC = 8
+        RSC_XRAM = 2,
+        RSC_XRAM_LOADED = 4,
+        RSC = 8,
+        RSC_STR_DONE = 16,
+        RSC_STR_LOADING = 32,
+        RSC_STR = 64,
     };
 
     S8 m_Key;
