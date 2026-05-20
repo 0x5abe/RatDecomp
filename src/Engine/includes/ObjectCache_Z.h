@@ -42,6 +42,10 @@ private:
 template <class T>
 class CacheEntryLRU_Z {
 public:
+    CacheEntryLRU_Z() {
+        m_CacheData = NULL;
+    }
+
     inline void SetSize(S32 i_LRUCount, S32 i_EntryCount) {
         m_CacheEntryCount = i_EntryCount;
         m_LRU.Init(i_LRUCount);

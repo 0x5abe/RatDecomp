@@ -8,7 +8,7 @@
 //#include "Global_Z.h"
 
 #define HandleGranularity 16384
-#define HANDLE_NULL BaseObject_ZHdl(0)
+#define HANDLE_NULL BaseObject_ZHdl()
 
 #define HANDLE_MARKED_FALSE 0
 #define HANDLE_MARKED_TRUE 1
@@ -23,6 +23,8 @@ Extern_Z GCGlobals gData;
 
 #define GETPTR(h) gData.ClassMgr->GetPtr(h)
 
+#ifndef BUGFIXES_Z
+// $SABE: Original version, does the dumb thing where each class in the chain sets GblID to 0
 #define HANDLE_Z(ClassName, ParentName)                          \
     class ClassName##Hdl;                                        \
     class ClassName##Hdl : public ParentName##Hdl {              \
@@ -35,8 +37,7 @@ Extern_Z GCGlobals gData;
             m_RealID.GblID = i_Org.m_RealID.GblID;               \
         }                                                        \
         ClassName##Hdl(const BaseObject_ZHdl& i_Org) {           \
-            ClassName##Hdl* Ptr = (ClassName##Hdl*)&i_Org;       \
-            m_RealID.GblID = Ptr->m_RealID.GblID;                \
+            m_RealID.GblID = i_Org.m_RealID.GblID;               \
         }                                                        \
         ClassName##Hdl& operator=(const ClassName##Hdl& i_Org) { \
             m_RealID.GblID = i_Org.m_RealID.GblID;               \
@@ -48,7 +49,33 @@ Extern_Z GCGlobals gData;
         operator ClassName*() const {                            \
             return (ClassName*)GETPTR((BaseObject_ZHdl&)*this);  \
         }                                                        \
-    }
+    };
+#else
+// $SABE: Bugfix version, no need to set GblID to 0 in each class, it's already done in the BaseObject_ZHdl constructor
+#define HANDLE_Z(ClassName, ParentName)                          \
+    class ClassName##Hdl;                                        \
+    class ClassName##Hdl : public ParentName##Hdl {              \
+    private:                                                     \
+    public:                                                      \
+        ClassName##Hdl(void) { }                                 \
+        ClassName##Hdl(const ClassName##Hdl& i_Org) {            \
+            m_RealID.GblID = i_Org.m_RealID.GblID;               \
+        }                                                        \
+        ClassName##Hdl(const BaseObject_ZHdl& i_Org) {           \
+            m_RealID.GblID = i_Org.m_RealID.GblID;               \
+        }                                                        \
+        ClassName##Hdl& operator=(const ClassName##Hdl& i_Org) { \
+            m_RealID.GblID = i_Org.m_RealID.GblID;               \
+            return *this;                                        \
+        }                                                        \
+        ClassName* operator->() const {                          \
+            return (ClassName*)GETPTR((BaseObject_ZHdl&)*this);  \
+        }                                                        \
+        operator ClassName*() const {                            \
+            return (ClassName*)GETPTR((BaseObject_ZHdl&)*this);  \
+        }                                                        \
+    };
+#endif // #ifndef BUGFIXES_Z
 
 // ClassName##Hdl(int i_Val) {
 //     m_RealID.GblID = i_Val;
@@ -85,7 +112,7 @@ public:
         return m_RealID.Ref.Key;
     }
 
-    Bool IsValid() {
+    Bool IsValid() const {
         BaseObject_Z* l_Ptr = *this;
         return l_Ptr != NULL;
     }
@@ -96,7 +123,10 @@ public:
 
     operator BaseObject_Z*() const;
 
-protected:
+    operator Bool() const {
+        return IsValid();
+    }
+
     HdlID m_RealID;
 };
 
@@ -110,6 +140,12 @@ struct HandleRec_Z {
         RSC_STR_LOADING = 32,
         RSC_STR = 64,
     };
+
+    HandleRec_Z() {
+        m_ObjPtr = NULL;
+        m_Key = 1;
+        m_Flag = 0;
+    }
 
     S8 m_Key;
     S8 m_Flag;

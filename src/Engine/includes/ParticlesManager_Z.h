@@ -24,7 +24,7 @@ struct _ParticleElement_Z {
     Vec3f m_Pos3D;
     Float m_Size3Dx;
     Float m_Size3Dy;
-};
+} Aligned_Z(16);
 
 class ParticlesManager_Z : public DataManager_Z<_ParticleElement_Z> {
 public:

@@ -88,7 +88,7 @@ ABC_AgentHdl ABC_ScriptManager::NewAgent(const Char* i_AgentClassName) {
 
 ABC_AgentHdl ABC_ScriptManager::NewAgent(const Name_Z& i_AgentClassName, const Char* i_AgentName) {
     if (InHeritName != i_AgentClassName && !gData.ClassMgr->IsObjectInherit(i_AgentClassName, InHeritName)) {
-        return ABC_AgentHdl();
+        return HANDLE_NULL;
     }
 
     ABC_AgentHdl l_AgentHdl;
@@ -100,7 +100,7 @@ ABC_AgentHdl ABC_ScriptManager::NewAgent(const Name_Z& i_AgentClassName, const C
     }
 
     if (!l_AgentHdl.IsValid()) {
-        return ABC_AgentHdl();
+        return HANDLE_NULL;
     }
 
     l_AgentHdl->SetName(i_AgentClassName);
@@ -193,7 +193,7 @@ Bool ABC_ScriptManager::Minimize() {
 }
 
 void ABC_ScriptManager::Send(abc_message i_Msg, ABC_Agent* i_Agent, Float i_Param) {
-    i_Agent->Receive(i_Msg, HANDLE_NULL, i_Param);
+    i_Agent->Receive(i_Msg, BaseObject_ZHdl(0), i_Param);
 }
 
 void ABC_ScriptManager::SendTimed(abc_message i_Msg, ABC_Agent* i_Agent, Float i_Delay, Float i_Param) {
@@ -259,7 +259,7 @@ void ABC_ScriptManager::CheckTimedMessages(Float i_DeltaTime) {
 
         if (l_Msg->m_Time <= 0.0f) {
             l_Msg->m_Next = NULL;
-            l_Msg->m_Sender = HANDLE_NULL;
+            l_Msg->m_Sender = BaseObject_ZHdl(0);
 
             l_Agent->Receive(l_Msg);
 
@@ -278,6 +278,7 @@ void ABC_ScriptManager::CheckTimedMessages(Float i_DeltaTime) {
     }
 }
 
+// TODO: FIX
 StreamAgent_ZHdl& ABC_ScriptManager::SetStreamAgent(const Name_Z& i_AgentClassName) {
     m_StreamAgentHdl = gData.ScriptMgr->NewAgent(i_AgentClassName);
     return m_StreamAgentHdl;

@@ -3,6 +3,7 @@
 #include "Name_Z.h"
 #include "String_Z.h"
 #include "DebugTools_Z.h"
+#include "Types_Z.h"
 
 #define WhereAmI_Z(wai) strcpy(WhereAmI, "_CoreMainLoop(): " wai)
 
@@ -43,6 +44,7 @@ Extern_Z void PrintMemoryStatus(Char* i_Msg);
 
 Extern_Z void RegisterGameClasses();
 Extern_Z void GameProgramInit();
+Extern_Z void RegisterGameCommands();
 
 // Engine Main Functions
 
@@ -55,6 +57,34 @@ void RegisterClasses();
 void RegisterGlobalCommands();
 
 // Global commands
+
+Bool ExitApp();
+Bool Source();
+Bool BSource();
+Bool SetFrame();
+Bool Help();
+Bool Pause();
+Bool SetDBPath();
+Bool SetDFPath();
+Bool LoadObjectLib();
+Bool RemoveObjectLib();
+Bool LoadMaterialLib();
+Bool RemoveMaterialLib();
+Bool LoadFont();
+Bool RemoveFont();
+Bool LoadSysRtc();
+Bool RemoveSysRtc();
+Bool CheckHandles();
+Bool AsynchCheckHandles();
+Bool InitRandomSeed();
+Bool SetBlockFrame();
+Bool SetTimeFactor();
+Bool PrintFreeMem();
+Bool SetBFPath();
+Bool EnableBF();
+Bool AddJoyStick();
+
+// Forward declarations
 
 class ManipulatorManager_Z;
 class AnimationManager_Z;
@@ -172,7 +202,7 @@ public:
     U32 m_FrameCount;
     Float m_Timer;
     U32 m_Unk_0x7c0;
-    Bool m_IsTimerCalibrated;
+    Bool m_TimerNotCalibrated;
     Float m_TargetSecondsPerFrame;
     Float m_AbsoluteTime;
     S16 m_Unk_0x7d0;
@@ -205,7 +235,7 @@ public:
         m_Unk_0x7d8 = 480;
         // $SABE: Probably a macro
         memset(&UnkMgr_0x4, 0, sizeof(XRamManager_Z*) + (U32)&XRamMgr - (U32)&UnkMgr_0x4);
-        m_IsTimerCalibrated = TRUE;
+        m_TimerNotCalibrated = TRUE;
         m_AbsoluteTime = 0.0f;
         m_TargetSecondsPerFrame = 0.0f;
         m_AppPath.StrCpy(".\\");

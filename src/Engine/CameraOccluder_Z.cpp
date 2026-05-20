@@ -6,7 +6,7 @@
 void CameraOccluder_Z::Init() {
     Manipulator_Z::Init();
     SetGroup(ag_camera_occlusion);
-    m_ViewportId = -1;
+    m_ViewportId = NONE_VIEWPORT;
 }
 
 void CameraOccluder_Z::Update(Float i_DeltaTime) {

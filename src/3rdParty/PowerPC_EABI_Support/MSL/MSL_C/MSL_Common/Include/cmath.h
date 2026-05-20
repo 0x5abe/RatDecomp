@@ -2,9 +2,8 @@
 #define STD_CMATH_H_
 #include "math.h"
 
-
 namespace std {
-template<typename T>
+template <typename T>
 inline double fabs(T x) {
     return ::fabs(x);
 }
@@ -37,8 +36,12 @@ inline float floor(float num) {
     return ::floorf(num);
 }
 
+inline float floorf(float num) {
+    return ::floorf(num);
+}
+
 inline float powf(float base, float exponent) {
     return ::pow(base, exponent);
-}  // namespace std
+} // namespace std
 }
 #endif

@@ -3,7 +3,7 @@
 
 Extern_Z "C" int sprintf(char* i_Buf, const char* i_Format, ...);
 
-static String_Z<256> DefaultStringAnimationMgr;
+static String_Z<ARRAY_CHAR_MAX> DefaultStringAnimationMgr;
 
 AnimationManager_Z::AnimationManager_Z()
     : m_NodeIds(ANIM_RESOURCE_MAX)

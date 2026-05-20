@@ -225,6 +225,20 @@ void DataManager_Z<T>::SetCullTime(Float i_CullTime) {
 template <class T>
 void DataManager_Z<T>::Update(Float i_DeltaTime) {
     m_CurTime += i_DeltaTime;
+
+    if (m_CurTime > 10.0f) {
+        S32 l_Size;
+        S32 i;
+
+        m_CurTime -= 10.0f;
+
+        l_Size = m_EntryDA.GetSize();
+        for (i = 0; i < l_Size; i++) {
+            if (m_EntryDA[i].m_State == RUNNING_MEM) {
+                m_EntryDA[i].m_LastUsedTime -= 10.0f;
+            }
+        }
+    }
 }
 
 template <class T>

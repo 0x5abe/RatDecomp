@@ -2,6 +2,7 @@
 #define _MATERIALMANAGER_Z_H_
 #include "MaterialAnim_Z.h"
 #include "MaterialAnim_ZHdl.h"
+#include "Material_Z.h"
 #include "StaticArray_Z.h"
 #include "DynArray_Z.h"
 
@@ -10,16 +11,21 @@
 
 class MaterialManager_Z {
 private:
-    StaticArray_Z<MaterialAnim_ZHdl, MAX_MATERIAL_ANIMS> m_MaterialAnims;
-    StaticArray_Z<MaterialAnim_ZHdl, MAX_MATERIAL_ANIMS> m_MaterialAnimsReallyAnimated;
+    StaticArray_Z<MaterialAnim_ZHdl, MAX_MATERIAL_ANIMS> m_MaterialAnimHdls;
+    StaticArray_Z<MaterialAnim_ZHdl, MAX_MATERIAL_ANIMS> m_MaterialAnimHdlsReallyAnimated;
     DynArray_Z<MaterialUserDesc_Z, MAX_MATERIAL_USERS> m_MaterialUsers;
     Bool m_IsPaused;
 
 public:
     MaterialManager_Z();
-    ~MaterialManager_Z();
+    virtual ~MaterialManager_Z();
 
     void AddMaterialAnim(const MaterialAnim_ZHdl& i_MaterialAnimHdl);
+    void GetMaterialByName(const Name_Z& i_Name, MaterialAnim_ZHdl& o_MaterialAnimHdl);
+
+    void RegisterMaterialUser(S32 i_MaterialCode, NewMaterialUserProc i_NewMaterialUserProc);
+    MaterialUser_Z* GetMaterialUser(S32 i_MaterialCode);
+
     void Update(Float i_DeltaTime);
 
     inline void EndPause() {

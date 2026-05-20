@@ -3,6 +3,8 @@
 
 #include "Types_Z.h"
 
+void RegisterDebugCommand();
+
 enum EngineFlags {
     FL_ENGINE_NONE = 0 << 0,
     FL_FULLSCREEN = 1 << 0,
@@ -81,8 +83,9 @@ enum MaterialFlags {
 };
 
 enum GameFlags {
-    FL_GAME_NONE = 0 << 0,
-    FL_GAME_2_FRAMES = 1 << 15
+    FL_GAME_NONE = 0 << 0,     // 0
+    FL_GAME_PAL = 1 << 7,      // 0x80
+    FL_GAME_2_FRAMES = 1 << 15 // 0x8000
 };
 
 #endif // _DEBUGTOOLS_Z_H_

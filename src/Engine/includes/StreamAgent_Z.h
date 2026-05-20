@@ -18,12 +18,14 @@ public:
     DECL_BHV(StreamError);
     DECL_BHV(StreamResumed);
 
-    virtual void Start();
+    virtual void Start() {}
     virtual void End();
     virtual void Resume(S32 i_Cause);
-    virtual void Resumed();
+    virtual void Resumed() {}
     virtual void Abort();
     virtual void Aborted();
+
+    void OpenBigFile(const Char* i_BfName);
 
 private:
     StreamFile_ZHdl m_StreamHdl;

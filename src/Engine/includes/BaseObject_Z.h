@@ -8,15 +8,17 @@
 class ABC_Agent;
 
 class BaseObject_Z {
-public:
+protected:
     Name_Z m_Name;
     BaseObject_ZHdl m_Handle;
+
+public:
     BaseObject_Z() { };
 
     virtual void Init() { };
 
     virtual ~BaseObject_Z() {
-        m_Handle = HANDLE_NULL;
+        m_Handle = BaseObject_ZHdl(0);
     };
 
     virtual void Load(void** i_Data) { };
@@ -38,6 +40,14 @@ public:
 
     operator BaseObject_ZHdl() const {
         return GetHandle();
+    }
+
+    inline const Name_Z& GetName(void) const {
+        return m_Name;
+    }
+
+    inline Name_Z& GetName(void) {
+        return m_Name;
     }
 };
 

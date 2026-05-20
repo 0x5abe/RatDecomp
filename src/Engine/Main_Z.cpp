@@ -42,7 +42,6 @@
 #include "LodMove_Z.h"
 #include "VehiculeMove_Z.h"
 #include "ObjectsGame_Z.h"
-#include "ObjectsGameClip_Z.h"
 #include "Menu3D_Z.h"
 #include "Menu2D_Z.h"
 #include "RtcPlayer_Z.h"
@@ -79,6 +78,7 @@
 #include "ObjectBankManager_Z.h"
 #include "SurfaceCache_Z.h"
 #include "TriangleCache_Z.h"
+#include "Timer_Z.h"
 
 Extern_Z "C" void exit(int);
 
@@ -390,6 +390,96 @@ void RegisterClasses() {
     REGISTER_CLASS("ObjectsBounce_Z", "ObjectsMove_Z", ObjectsBounce_Z::NewObject);
     REGISTER_CLASS("ObjectsBreak_Z", "ObjectsBounce_Z", ObjectsBreak_Z::NewObject);
     RegisterGameClasses();
+}
+
+void RegisterGlobalCommands() {
+    REGISTERCOMMAND("eXit", ExitApp);
+    REGISTERCOMMAND("SouRCe", Source);
+    REGISTERCOMMAND("BSouRCe", BSource);
+    REGISTERCOMMAND("SetFrame", SetFrame);
+    REGISTERCOMMAND("Help", Help);
+    REGISTERCOMMAND("Pause", Pause);
+    REGISTERCOMMAND("SetDBPath", SetDBPath);
+    REGISTERCOMMAND("SetDFPath", SetDFPath);
+    REGISTERCOMMAND("LoadObjectLib", LoadObjectLib);
+    REGISTERCOMMAND("RemoveObjectLib", RemoveObjectLib);
+    REGISTERCOMMAND("LoadMaterialLib", LoadMaterialLib);
+    REGISTERCOMMAND("RemoveMaterialLib", RemoveMaterialLib);
+    REGISTERCOMMAND("LoadFOnt", LoadFont);
+    REGISTERCOMMAND("RemoveFOnt", RemoveFont);
+    REGISTERCOMMAND("LoadSysRtc", LoadSysRtc);
+    REGISTERCOMMAND("RemoveSysRtc", RemoveSysRtc);
+    REGISTERCOMMAND("CheckHandles", CheckHandles);
+    REGISTERCOMMAND("AsynchCheckHandles", AsynchCheckHandles);
+    REGISTERCOMMAND("MemoryGraphColor", (CommandProc)MemoryGraphColor);
+    REGISTERCOMMAND("InitRandomSeed", InitRandomSeed);
+    REGISTERCOMMAND("SetBlockFrame", SetBlockFrame);
+    REGISTERCOMMAND("SetTimeFactor", SetTimeFactor);
+    REGISTERCOMMAND("PrintFreeMem", PrintFreeMem);
+    REGISTERCOMMANDC("SetBFPath", SetBFPath, " [Target] [Source]");
+    REGISTERCOMMANDC("EnableBF", EnableBF, " [Read/Write]");
+    REGISTERCOMMANDC("AddJoyStick", AddJoyStick, "Ajoute un joystick");
+
+    RegisterGameMgrCommand();
+    RegisterDebugCommand();
+    RegisterGameCommands();
+}
+
+// Command functions
+
+Bool AddJoyStick() {
+    gData.InputMgr->AddDevice();
+    return TRUE;
+}
+
+// Globals methods
+
+void Globals::InitTime() {
+    if (m_TimerNotCalibrated) {
+        CalibrateTimer();
+    }
+    m_AbsoluteTime = GetAbsoluteTime();
+    m_TimerNotCalibrated = FALSE;
+}
+
+Float Globals::GetOneFrameTime() {
+    if (m_GameFlag & FL_GAME_PAL) {
+        return FRAME_TIME_PAL;
+    }
+    return FRAME_TIME_NTSC;
+}
+
+Float Globals::GetDeltaTime() {
+    Float l_DeltaTime;
+
+    if (gData.NetMgr) {
+        NetMgr->FixNetTime();
+        l_DeltaTime = NetMgr->GetDeltaTime();
+    }
+    else {
+        l_DeltaTime = GetAbsoluteTime();
+    }
+
+    Float l_Fps;
+
+    if (!gData.m_BlockFrame && m_TargetSecondsPerFrame) {
+        l_DeltaTime = m_TargetSecondsPerFrame * GetOneFrameTime() + m_AbsoluteTime;
+        l_Fps = l_DeltaTime - m_AbsoluteTime;
+    }
+    else {
+        l_Fps = m_TimeFactor * (l_DeltaTime - m_AbsoluteTime);
+    }
+
+    m_AbsoluteTime = l_DeltaTime;
+
+    if (gData.m_GameFlag & FL_GAME_PAL) {
+        l_DeltaTime = Clamp(l_Fps, FRAME_TIME_PAL, 1.0f / 15.0f);
+    }
+    else {
+        l_DeltaTime = Clamp(l_Fps, FRAME_TIME_NTSC, 1.0f / 15.0f);
+    }
+
+    return l_DeltaTime;
 }
 
 Date_Z Globals::GetDate() {

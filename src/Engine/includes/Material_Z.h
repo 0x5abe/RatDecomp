@@ -46,9 +46,40 @@ enum MaterialCode_Z {
 
 #define FL_MTL_CODE_ALL (FL_MTL_CODE_TRANSFORM | FL_MTL_CODE_UNK2 | FL_MTL_CODE_UNK4 | FL_MTL_CODE_WATER_OCEAN | FL_MTL_CODE_STENCIL)
 
+class MaterialUser_Z {
+public:
+    virtual void Release() = 0;
+    virtual void Update(Material_Z* i_Material) = 0;
+};
+
+typedef MaterialUser_Z* (*NewMaterialUserProc)();
+
 struct MaterialUserDesc_Z {
-    S32 m_Code;                // Material code that applies to this user
-    NewObjectProc m_NewObject; // Function to create the material user object
+    S32 m_Code;                                // Material code that applies to this user
+    NewMaterialUserProc m_NewMaterialUserProc; // Function to create the material user object
+};
+
+struct RegMaterialUser_Z {
+    U32 m_Code;
+    MaterialUser_Z* m_MatUser;
+
+    RegMaterialUser_Z() {
+        m_Code = FL_MTL_CODE_DIFFUSE;
+        m_MatUser = NULL;
+    }
+
+    ~RegMaterialUser_Z() {
+        Clean();
+    }
+
+    void Clean() {
+        if (m_MatUser) {
+            m_MatUser->Release();
+            Delete_Z m_MatUser;
+            m_MatUser = NULL;
+            m_Code = FL_MTL_CODE_DIFFUSE;
+        }
+    }
 };
 
 class Material_Z : public ResourceObject_Z {
@@ -68,7 +99,7 @@ public:
     virtual void EndLoad();
     virtual void Clean();
     virtual Bool MarkHandles();
-    virtual void Clone(Material_ZHdl& a1);
+    virtual void Clone(Material_ZHdl& o_MaterialHdl);
     virtual void UpdateTMatrix();
     virtual void Changed();
     static U32 DefaultRdrFlag;
@@ -186,6 +217,10 @@ public:
         return m_ObjectFlag;
     }
 
+    inline void EnableFlag(U8 i_Flag) {
+        m_Flag |= i_Flag;
+    }
+
     inline void SetFlag(U8 i_Flag) {
         m_Flag = i_Flag;
     }
@@ -235,6 +270,26 @@ public:
         return m_Params;
     }
 
+    MaterialUser_Z* GetMaterialUser() {
+        return m_MaterialUser.m_MatUser;
+    }
+
+    void UpdateTransp() {
+        Bitmap_Z* l_Bmap = m_BmapHdls[mtl_diffuse];
+        if (l_Bmap) {
+            if (l_Bmap->IsTransp(BM_TRANSP)) {
+                m_RdrFlag = m_RdrFlag | FL_IS_ALPHABLENDED;
+                return;
+            }
+        }
+        if (l_Bmap) {
+            if (l_Bmap->IsTransp(BM_TRANSP_ONE)) {
+                m_RdrFlag = m_RdrFlag | FL_IS_TRANSPARENT;
+                return;
+            }
+        }
+    }
+
 private:
     Vec3f m_DiffuseColor Aligned_Z(16); // $SABE: Could be wrong, maybe they had manual padding
     Float m_DiffuseOpacity;
@@ -253,8 +308,7 @@ private:
     U8 m_TileU;
     U8 m_TileV;
     U8 m_ConstantAlphaWriteValue;
-    U32 m_RdrFlag2;
-    WaterHeightMap_Z* m_WaterHeightMap;
+    RegMaterialUser_Z m_MaterialUser;
     Bitmap_ZHdl m_BmapHdls[mtl_nb_params];
 };
 

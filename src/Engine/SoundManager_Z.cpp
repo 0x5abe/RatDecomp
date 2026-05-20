@@ -58,9 +58,9 @@ Bool Track_Z::Release() {
     m_Used = FALSE;
     m_LifeTime = 0.0f;
     m_DistanceCamToSound = 0.0f;
-    m_SoundHdl = Sound_ZHdl();
-    m_NodeHdl = Node_ZHdl();
-    m_AgentHdl = ABC_AgentHdl();
+    m_SoundHdl = HANDLE_NULL;
+    m_NodeHdl = HANDLE_NULL;
+    m_AgentHdl = HANDLE_NULL;
     m_FrameRequestedNb = gData.m_FrameCount;
     m_UnkZoneId = -1;
     m_CamOccluderZoneId = -1;

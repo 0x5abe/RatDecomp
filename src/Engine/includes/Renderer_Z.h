@@ -101,6 +101,18 @@
 //     do_count=31
 // };
 
+enum ViewportId {
+    NONE_VIEWPORT = -1,
+    MAX_VIEWPORT = 4,
+    START_PREDEFINED_VIEWPORT = 4,
+    USER_VIEWPORT_FIRST = 4,
+    USER_VIEWPORT_SECOND = 5,
+    USER_VIEWPORT_LAST = 6,
+    GLOBAL_VIEWPORT = 6,
+    GLOBAL_DEBUG_VIEWPORT = GLOBAL_VIEWPORT,
+    TOTAL_VIEWPORT = 7
+};
+
 class Omni_Z;
 class Camera_Z;
 class LightData_Z;
@@ -282,8 +294,8 @@ private:
     void* m_NullVertexConstant;
     Float m_LodDist;
     Float m_LodPatchDist;
-    U32 m_LodPatchMax;
-    U32 m_LodPatchMin;
+    S32 m_LodPatchMax;
+    S32 m_LodPatchMin;
     CacheState_Z m_LightCacheState1;
     CacheState_Z m_LightCacheState2;
     CacheState_Z m_PatchCacheState;

@@ -13,6 +13,7 @@ class MaterialAnim_ZHdl;
 #define FL_MAT_PLAYONCE (U8)(1 << 2)
 #define FL_MAT_NEVERAGAIN (U8)(1 << 3)
 #define FL_MAT_AUTOSTART (U8)(1 << 4)
+#define FL_MAT_NOT_ANIMATED (U8)(1 << 5)
 
 #define FL_MAT_NOT_RESTART (U8)(FL_MAT_PLAYONCE | FL_MAT_PLAYED)
 
@@ -31,9 +32,15 @@ public:
     void Reset();
     void DoStart();
     void Stop();
+    void Update(Float i_DeltaTime);
+    void SetAnimTime(Float i_Time);
 
     inline void SetMaterial(const Material_ZHdl& i_MaterialHdl) {
         m_MaterialHdl = i_MaterialHdl;
+    }
+
+    Bool IsAnimated() {
+        return !(m_PlayFlag & FL_MAT_NOT_ANIMATED);
     }
 
 private:

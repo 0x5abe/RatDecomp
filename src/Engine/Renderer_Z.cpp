@@ -192,7 +192,7 @@ void Renderer_Z::Draw(S32 i_ViewportId, Float i_DeltaTime) {
     l_DrawInfo.m_DeltaTime = i_DeltaTime;
     m_Viewports[i_ViewportId].Draw(l_DrawInfo);
 
-    if (i_ViewportId == 6) {
+    if (i_ViewportId == GLOBAL_DEBUG_VIEWPORT) {
         // TODO: Implement debug draw
     }
 }
@@ -201,7 +201,7 @@ void Renderer_Z::Draw(Float i_DeltaTime) {
     for (S32 i = 0; i < GetNbViewport(); i++) {
         Draw(i, i_DeltaTime);
     }
-    Draw(6, i_DeltaTime);
+    Draw(GLOBAL_DEBUG_VIEWPORT, i_DeltaTime);
 }
 
 void Renderer_Z::BeginRender() {

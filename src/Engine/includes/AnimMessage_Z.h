@@ -40,10 +40,6 @@ struct RegMessage_Z {
     BoneNode_Z* m_BoneNodePtr;
     Node_Z* m_NodePtr;
 
-    RegMessage_Z() {
-        m_NameParam = Name_Z();
-    }
-
     RegMessage_Z& operator=(const Message_Z& i_Msg) {
         m_Id = i_Msg.m_Id;
         m_U32Param = i_Msg.m_U32Param;

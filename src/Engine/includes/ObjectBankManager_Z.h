@@ -4,6 +4,8 @@
 #include "Object_ZHdl.h"
 #include "Node_ZHdl.h"
 
+#define BANKMGR_MAX_NODE 128
+
 struct BankData {
     Name_Z m_Name;
     S32 m_UnkS32_0x4;
@@ -15,7 +17,7 @@ class ObjectBankManager_Z {
 private:
     HoleArray_Z<BankData, 16> m_Banks;
     Node_ZHdlDA m_NodeHdls;
-    BitArray_Z m_UnkBA_0x24;
+    BitArray_Z m_NodeStatus; // If a given node index in m_NodeHdls is free or not
 
 public:
     ObjectBankManager_Z();

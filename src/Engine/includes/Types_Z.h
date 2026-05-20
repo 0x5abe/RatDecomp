@@ -31,6 +31,15 @@ typedef volatile double VDouble;
 #undef S32_MIN
 #define S32_MIN -2147483648
 
+#undef S32_MAX
+#define S32_MAX 2147483647
+
+#undef U32_MIN
+#define U32_MIN 0
+
+#undef U32_MAX
+#define U32_MAX 0xFFFFFFFF
+
 #undef U32_MINUS_ONE
 #define U32_MINUS_ONE ((U32) - 1)
 

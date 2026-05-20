@@ -6,6 +6,9 @@
 #include "ClassManager_Z.h"
 #include "DynPtrArray_Z.h"
 
+#define STR_FILE_LOAD_STAGE_ABORT -1
+#define STR_FILE_LOAD_STAGE_INIT 0
+
 class StreamFile_Z : public Manipulator_Z {
 public:
     StreamFile_Z() { }
@@ -16,7 +19,12 @@ public:
 
     static BaseObject_Z* NewObject() { return NewL_Z(56) StreamFile_Z; }
 
+    void Start(const Char* i_FilePath, const StreamAgent_ZHdl& i_AgentHdl);
+    void Resume();
+
     Stream_Z& GetStream() { return m_Str; }
+
+    void SetLoadStage(S32 i_LoadStage) { m_LoadStage = i_LoadStage; }
 
 private:
     S32 m_LoadStage;

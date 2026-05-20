@@ -1,6 +1,5 @@
 #include "Game_Z.h"
 #include "Program_Z.h"
-#include "ObjectsGameClip_Z.h"
 #include "ObjectsGame_Z.h"
 #include "World_Z.h"
 #include "LodMove_Z.h"
@@ -29,13 +28,22 @@ U32 Game_Z::GetNbVp() const {
     return m_ObjectsGameMgrHdl->GetNbVp();
 }
 
+// TODO: Finish matching
 void Game_Z::SetGameWorld(const World_ZHdl& i_WorldHdl, const Char* i_GameName) {
     m_WorldHdl = i_WorldHdl;
-    m_GameName.StrCpy(i_GameName);
+    m_GameName = i_GameName;
+    // GetPtr is called by an inlined operator-> here
     m_ObjectsGameMgrHdl->SetGame(GetHandle());
+
     for (S32 i = 0; i < m_ObjectGameHdls.GetSize(); i++) {
+        // GetPtr is called by an inlined operator-> here
         m_ObjectGameHdls[i]->SetGame(GetHandle());
+        // the stack address of the return value of GetHandle()
+        // should be loaded into r27 before the loop and then moved
+        // into r4, instead it's being added directly into r4
     }
+
+    // GetPtr is called by an inlined operator-> here
     m_SubRootNodeHdl = i_WorldHdl->GetNodeByName(Name_Z::GetID("SUB_ROOT"));
 }
 
@@ -90,7 +98,7 @@ void Game_Z::Update(Float i_DeltaTime) {
     }
     else {
         if (m_StreamNotifyAgent.IsValid()) {
-            Stream(VEC3F_NULL, Agent_ZHdl(), msg_no_message);
+            Stream(VEC3F_NULL, HANDLE_NULL, msg_no_message);
         }
     }
 }
@@ -107,7 +115,7 @@ void Game_Z::SetGamePlayerNb(S32 i_Nb, Bool i_IsMono, const Name_Z& i_CameraAgen
     m_PlayerCamAgentHdls.SetSize(m_NbPlayer);
     m_ObjectsGameMgrHdl->SetNbVp(i_IsMono ? 1 : m_NbPlayer);
 
-    String_Z<ARRAY_CHAR_MAX> l_CameraName;
+    String_Z<ARRAY_CHAR_MAX> l_CameraNameStr;
 
     World_Z* l_World = m_WorldHdl;
     Node_ZHdl l_StartBaseHdl = l_World->GetNodeByName(Name_Z::GetID("Start_Base"));
@@ -126,15 +134,16 @@ void Game_Z::SetGamePlayerNb(S32 i_Nb, Bool i_IsMono, const Name_Z& i_CameraAgen
         if (!l_CamAgentHdl.IsValid()) {
             l_CamAgentHdl = gData.ScriptMgr->NewAgent(Name_Z::GetID("CameraAgent_Z"), "CameraAgent");
         }
-        l_CameraName.Sprintf("%s_CAMERA_VP_%d", (const Char*)m_GameName, i);
+        l_CameraNameStr.Sprintf("%s_CAMERA_VP_%d", (const Char*)m_GameName, i);
         m_PlayerCamAgentHdls[i] = l_CamAgentHdl;
         CameraAgent_Z* l_CamAgent = l_CamAgentHdl;
 
-        m_PlayerCamNodeHdls[i] = gData.ClassMgr->NewObject(Name_Z::GetID("Node_Z"), Name_Z::GetID(l_CameraName));
+        m_PlayerCamNodeHdls[i] = gData.ClassMgr->NewObject(Name_Z(Name_Z::GetID("Node_Z")), Name_Z::GetID(l_CameraNameStr));
         Node_Z* l_CamNode = (Node_Z*)GETPTR(m_PlayerCamNodeHdls[i]);
         l_CamNode->SetTranslation(l_StartPos);
         l_CamNode->SetLight(gData.SystemDatas->GetDefaultLight());
-        l_CamNode->SetObject((Camera_ZHdl&)gData.ClassMgr->NewObject(Name_Z::GetID("Camera_Z"), Name_Z::GetID(l_CameraName)));
+
+        l_CamNode->SetObject((Camera_ZHdl&)gData.ClassMgr->NewObject(Name_Z(Name_Z::GetID("Camera_Z")), Name_Z::GetID(l_CameraNameStr)));
         l_CamNode->Changed();
         l_CamNode->Update();
         l_World->GetRoot()->AddSon(m_PlayerCamNodeHdls[i], TRUE);

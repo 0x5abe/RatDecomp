@@ -714,7 +714,7 @@ config.libs = [
         "progress_category": ["engine", "rat"],  # str | List[str]
         "objects": [
             Object(NonMatching, "Engine/InGameDatas_Z.cpp"),
-            Object(NonMatching, "Engine/ObjectBankManager_Z.cpp"),
+            Object(NonMatching, "Engine/ObjectBankManager_Z.cpp",extra_cflags=["-O4,s","-inline off"]),
             Object(NonMatching, "Engine/GameManager_Z.cpp"),
             Object(NonMatching, "Engine/Math_Z.cpp"),
             Object(NonMatching, "Engine/ObjectsMoveCollShadow_Z.cpp"),
@@ -924,7 +924,7 @@ config.libs = [
             Object(Matching,    "Engine/AnimationManagerSkel_Z.cpp"),
             Object(Matching,    "Engine/CameraEngineZoneColl_Z.cpp"),
             Object(NonMatching, "Engine/Breakable_Z.cpp"),
-            Object(NonMatching, "Engine/Material_Z.cpp"),
+            Object(Matching,    "Engine/Material_Z.cpp"),
             Object(NonMatching, "Engine/ObjectsGameSkel_Z.cpp"),
             Object(NonMatching, "Engine/DynamicAnim2_Z.cpp"),
             Object(NonMatching, "Engine/Agent_Z.cpp"),
@@ -1005,7 +1005,7 @@ config.libs = [
             Object(Matching,    "Engine/MeshMorph_Z.cpp"),
             Object(NonMatching, "Engine/SplineZone_Z.cpp"),
             Object(NonMatching, "Engine/ParticlesDraw_Z.cpp"),
-            Object(NonMatching, "Engine/VolumeAgent_Z.cpp"),
+            Object(Matching,    "Engine/VolumeAgent_Z.cpp"),
         ],
     },
     {

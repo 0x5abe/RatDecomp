@@ -7,7 +7,7 @@
 void CameraStream_Z::Init() {
     Manipulator_Z::Init();
     SetGroup(ag_camera_stream);
-    m_ViewportId = -1;
+    m_ViewportId = NONE_VIEWPORT;
 }
 
 // TODO: Finish matching
@@ -21,5 +21,5 @@ void CameraStream_Z::Update(Float i_DeltaTime) {
     Game_Z* l_Game = gData.GameMgr->GetGame(l_GameId);
     World_Z* l_World = l_Game->GetWorld();
     Vec3f l_CamPos = l_Vp.GetCamera()->GetTranslation();
-    l_Game->Stream(l_CamPos, Agent_ZHdl());
+    l_Game->Stream(l_CamPos, HANDLE_NULL);
 }

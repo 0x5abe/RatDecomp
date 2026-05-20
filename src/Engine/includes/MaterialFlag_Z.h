@@ -4,6 +4,7 @@
 // Material flags
 #define FL_IS_ALPHABLENDED (1 << 5)
 #define FL_IS_TRANSPARENT (1 << 6)
+#define FL_TRANSP_RESET ~(FL_IS_ALPHABLENDED | FL_IS_TRANSPARENT)
 #define FL_INVISIBLE (1 << 7)
 #define FL_TEX_ADDRESS_CLAMP_U (1 << 8)
 #define FL_TEX_ADDRESS_CLAMP_V (1 << 9)
@@ -59,10 +60,11 @@
 #define FL_MAT_COL_UNK28 (1 << 28)
 #define FL_MAT_COL_UNK29 (1 << 29)
 
-#define FL_TEX_DIFFUSE (1 << 0)    // Diffuse texture
-#define FL_TEX_ENV (1 << 1)        // Environment texture
-#define FL_TEX_BUMP (1 << 2)       // Bump texture
-#define FL_TEX_SPECULAR (1 << 3)   // Specular texture
+#define FL_TEX_DIFFUSE (U8)(1 << 0)  // Diffuse texture
+#define FL_TEX_ENV (U8)(1 << 1)      // Environment texture
+#define FL_TEX_BUMP (U8)(1 << 2)     // Bump texture
+#define FL_TEX_SPECULAR (U8)(1 << 3) // Specular texture
+#define FL_TEX_RESET (U8) ~(FL_TEX_DIFFUSE | FL_TEX_ENV | FL_TEX_BUMP | FL_TEX_SPECULAR)
 #define FL_MATERIAL_PAWAP (1 << 4) // Pawap material
 
 #endif

@@ -59,6 +59,10 @@ public:
     virtual U32 GetUserHandle_NetObjet(U32 a1) = 0;
     virtual void InitScanForNewSlave_NetObjet() = 0;
     virtual void ScanForNewSlave_NetObjet(U32& a1, U32& a2) = 0;
+
+    inline Float GetDeltaTime() {
+        return m_Time2;
+    }
 };
 
 #endif // _NETMANAGER_Z_H_

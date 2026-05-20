@@ -42,7 +42,7 @@ void Viewport_Z::GetPosAndSize(S32& o_StartX, S32& o_StartY, S32& o_SizeX, S32& 
 
 void Viewport_Z::SetWorld(const World_ZHdl& i_WorldHdl) {
     m_WorldHdl = i_WorldHdl;
-    m_OccluderHdl = Occluder_ZHdl();
+    m_OccluderHdl = HANDLE_NULL;
     if (m_WorldHdl.IsValid() && m_WorldHdl->GetNbOccluder() != 0) {
         m_OccluderHdl = m_WorldHdl->GetOccluder(0);
     }

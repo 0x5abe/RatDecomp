@@ -18,4 +18,9 @@
         (void)0;             \
     } while (0)
 
+#undef DEBUG_Z
+#ifdef NONMATCHING_Z
+#define DEBUG_Z
+#endif
+
 #endif

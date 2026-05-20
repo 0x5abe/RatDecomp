@@ -17,3 +17,26 @@ Bool MaterialAnim_Z::MarkHandles() {
     }
     return TRUE;
 }
+
+void MaterialAnim_Z::Update(Float i_DeltaTime) {
+    if (m_PlayFlag & FL_MAT_PLAY) {
+        m_CurTime += i_DeltaTime;
+        if (m_CurTime > m_MaxTime && m_PlayFlag & FL_MAT_PLAYONCE) {
+            m_PlayFlag |= FL_MAT_PLAYED;
+            m_PlayFlag &= ~FL_MAT_PLAY;
+            m_CurTime = m_MaxTime;
+        }
+        else {
+            while (m_CurTime > m_MaxTime) {
+                m_CurTime -= m_MaxTime;
+            }
+        }
+        SetAnimTime(m_CurTime);
+
+        Material_Z* l_Material = m_MaterialHdl;
+        MaterialUser_Z* l_MatUser = l_Material->GetMaterialUser();
+        if (l_MatUser) {
+            l_MatUser->Update(l_Material);
+        }
+    }
+}

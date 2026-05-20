@@ -5,12 +5,6 @@
 
 Extern_Z "C" int rand();
 
-namespace std {
-
-Extern_Z float floorf(float);
-
-}
-
 template <S32 SizeX, S32 SizeY, S32 SizeZ>
 class PerlinArray3D_Z {
 public:

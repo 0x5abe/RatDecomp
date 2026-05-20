@@ -138,12 +138,17 @@ void HandleManager_Z::MarkU32Handle(U32 i_Hdl) {
 
 void HandleManager_Z::ExpandSize(S32 i_NewSize) {
     S32 l_NewSize = m_HandleRecDASize + i_NewSize;
+
     m_HandleRecDA.SetSize(l_NewSize);
     m_FreeRecDA.SetSize(l_NewSize);
+
     m_NbFree = i_NewSize;
     m_HandleRecDASize = l_NewSize;
-    for (S32 i = 0; i < m_HandleRecDASize; i++) {
-        m_FreeRecDA[i] = l_NewSize--;
+
+    S32 i = 0;
+    while (i_NewSize-- > 0) {
+        m_FreeRecDA[i] = --l_NewSize;
+        i++;
     }
 }
 
@@ -158,4 +163,7 @@ BaseObject_ZHdl HandleManager_Z::U32ToHandle(S32 i_Hdl) {
 }
 
 void HandleStream_Z::Draw(DrawInfo_Z& i_DrawInfo) {
+}
+
+void HandleStream_Z::Update(Float i_DeltaTime) {
 }

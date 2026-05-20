@@ -3,6 +3,8 @@
 #include "DynArray_Z.h"
 #include "Math_Z.h"
 
+#define MAT4X4BUFFER_GRANULARITY 0x400
+
 struct MatDbId {
     U16 Id[2];
 };
@@ -38,5 +40,7 @@ private:
     U16 m_FreeMatDbIdNb;
     DynArray_Z<U16> m_FreeMatDbIdIndices;
 };
+
+Bool GetMatrixUsage();
 
 #endif

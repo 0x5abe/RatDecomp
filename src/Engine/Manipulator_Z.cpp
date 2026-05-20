@@ -49,7 +49,7 @@ void Manipulator_Z::Heartbeat(Float i_DeltaTime) {
 }
 
 ManipulatorDraw_Z::ManipulatorDraw_Z() {
-    m_ViewportId = 6;
+    m_ViewportId = GLOBAL_VIEWPORT;
     m_ManipGroup = ag_ui_draw;
 }
 

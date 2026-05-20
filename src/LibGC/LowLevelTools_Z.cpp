@@ -97,14 +97,14 @@ void Node_Z::GetLocal(const Capsule_Z& i_WorldCapsule, Capsule_Z& o_LocalCapsule
     o_LocalCapsule.Radius = i_WorldCapsule.Radius * m_InverseUniformScale;
 }
 
-#ifdef NONMATCHING_Z
+#ifdef DEBUG_Z
 int g_Locks;
 #endif
 
 #pragma global_optimizer off
 
 BaseObject_Z* HandleManager_Z::GetPtr(const BaseObject_ZHdl& i_Hdl) const {
-#ifdef NONMATCHING_Z
+#ifdef DEBUG_Z
     g_Locks++;
 #endif
     S32 l_ID = i_Hdl.GetID();

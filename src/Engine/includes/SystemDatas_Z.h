@@ -14,6 +14,9 @@ public:
     SystemDatas_Z();
     ~SystemDatas_Z();
 
+    MaterialAnim_ZHdl GetMaterialByName(const Name_Z& i_Name);
+    S32 GetFontId(const Name_Z& i_Name);
+
     inline LightData_ZHdl& GetDefaultLight() {
         return m_DefaultLightDataHdl;
     }

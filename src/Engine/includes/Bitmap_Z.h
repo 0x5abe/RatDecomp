@@ -82,6 +82,14 @@ public:
         m_Transp = i_Transp;
     }
 
+    inline U8 GetTransp() {
+        return m_Transp;
+    }
+
+    inline Bool IsTransp(U8 i_Transp) {
+        return m_Transp == i_Transp;
+    }
+
     void Clear(Color i_Color);
     U8 GetBestPalEntry(U8 i_Red, U8 i_Green, U8 i_Blue, U8 i_Alpha);
     U16 GetColor(const Color& i_Color);

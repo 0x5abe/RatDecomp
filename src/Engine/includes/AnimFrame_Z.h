@@ -36,7 +36,7 @@ struct KeyFollow_Z : public Key_Z {
 
 public:
     KeyFollow_Z() {
-        m_NodeHdl = Node_ZHdl();
+        m_NodeHdl = HANDLE_NULL;
     }
 
     KeyFollow_Z(const Float i_Time) {

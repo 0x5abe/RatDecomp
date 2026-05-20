@@ -4,56 +4,7 @@
 #include "Main_Z.h"
 #include "Math_Z.h"
 #include "HoleArray_Z.h"
-
-struct InputDevice_Z {
-    U8 m_Pad_0x0[0x316];
-    Bool m_AnyDPadPressed;
-    U8 m_Pad_0x317[0x3];
-    Bool m_DPadUpPressed;
-    Bool m_DPadDownPressed;
-    Bool m_DPadLeftPressed;
-    Bool m_DPadRightPressed;
-    U8 m_Pad_0x31e[0x36];
-
-    inline Bool IsAnyDPadPressed() const {
-        return m_AnyDPadPressed;
-    }
-};
-
-struct InputAction_Z {
-    Bool m_UnkBool_0x0;
-    Bool m_UnkBool_0x1;
-    Bool m_UnkBool_0x2;
-    Float m_Unk4Bytes_0x4;
-    Bool m_UnkBool_0x8;
-    Bool m_UnkBool_0x9;
-    Bool m_UnkBool_0xa;
-    S32 m_Unk4Bytes_0xc;
-    Float m_UnkFloat_0x10;
-    Float m_UnkFloat_0x14;
-    Float m_BaseValue;
-    Float m_MinValue;
-    Float m_MaxValue;
-    Float m_UnkFloat_0x24;
-    S32 m_UnkS32_0x28;
-    Float m_UnkFloat_0x2c;
-    Bool m_Pressed;
-    Bool m_UnkBool_0x31;
-    Bool m_UnkBool_0x32;
-    Float m_PressedTimer;
-    Float m_SomeTimer_0x38;
-    Float m_SomeOtherTimer_0x3c;
-    S32 m_DeviceIdx;
-    S32 m_ActionId;
-};
-
-struct InputActionContext_Z {
-    S32 m_DeviceIdx;
-    Bool m_UnkBool_0x4;
-    DynArray_Z<InputAction_Z, 4> m_Actions;
-    S32 m_UnkS32_0x10;
-    S32 m_UnkS32_0x14;
-};
+#include "InputAction_Z.h"
 
 struct ButtonRemap_Z {
     S32 m_ButtonId;
@@ -129,12 +80,12 @@ public:
     virtual void AddDevice();
     virtual void ResetPads();
     virtual void RemoveDevice(S32 a1);
-    virtual void UpdateInput(Float a1);
+    virtual void UpdateInput(Float i_DeltaTime);
     virtual void IsButtonPressed(U8 a1);
     virtual void IsAnyButton(U32 a1);
     virtual void ChangeActionMapping(U32 a1, S32* a2, S32* a3);
-    virtual void SetControl(S32 a1, Name_Z a2, Name_Z a3);
-    virtual void SetControlMode(S32 a1, Bool a2);
+    virtual void SetControl(S32 i_RemapIdx, Name_Z i_PrimaryButtonName, Name_Z i_SecondaryButtonName);
+    virtual void SetControlMode(S32 i_RemapIdx, Bool i_ControlMode);
     virtual void EnableJoystick(S32 a1);
     virtual void DisableJoystick(S32 a1);
     virtual void EnableVibration(S32 a1, Bool a2);
@@ -144,6 +95,8 @@ public:
     virtual void GetPCStringFromInput(Char* a1, S32 a2, S32 a3);
     virtual void GetControls(InputDevice_Z* a1, void* a2, Bool a3);
     virtual void GetControl(InputDevice_Z* a1, S32 a2, void* a3, Bool a4);
+
+    S32 FindButtonId(Name_Z i_ButtonName);
 };
 
 class InputEngine_Z {

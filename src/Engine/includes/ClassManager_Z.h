@@ -87,7 +87,7 @@ public:
     const BaseObject_ZHdl& NewObject(const Name_Z& i_ClassName, const Name_Z& i_Name);
     const BaseObject_ZHdl& NewObject(const Name_Z& i_ClassName);
     const BaseObject_ZHdl& NewObject(const Char* i_ClassName);
-    const BaseObject_ZHdl& NewObject(S16 i_ClassId, const Name_Z& i_Name);
+
     const BaseObject_ZHdl& NewResource(const Name_Z& i_ClassName, const Name_Z& i_Name);
     Bool GetFile(const Char* i_Path, File_Z& i_File);
 
@@ -105,7 +105,12 @@ public:
 
     Bool IsBigFileOpened() const { return m_BfOpened; }
 
+    Bool IsBigFileRead() const { return m_BfRead; }
+
 private:
+    // $SABE: Keeping this private to avoid the dumb issue where Name_Z::GetID gets downcasted to S16 instead of it being a Name_Z
+    const BaseObject_ZHdl& NewObject(S16 i_ClassId, const Name_Z& i_Name);
+
     Class_ZDA m_ClassList;
     HashTableBase_Z<S32Hash_Z> m_ClassNameToIndex;
     S32 m_UnkS32_0x16c;
@@ -120,7 +125,7 @@ private:
     HashTableBase_Z<S32Hash_Z> m_ObjectNameToStringIndex;
     DynArray_Z<String_Z<ARRAY_CHAR_MAX>, 16> m_ObjectNameStrings;
     String_Z<ARRAY_CHAR_MAX> m_BfHeaderText; // Includes version
-    String_Z<ARRAY_CHAR_MAX> m_BfVersion; // Just version
+    String_Z<ARRAY_CHAR_MAX> m_BfVersion;    // Just version
 };
 
 #endif

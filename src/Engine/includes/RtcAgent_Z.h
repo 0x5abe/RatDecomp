@@ -27,7 +27,7 @@ public:
     virtual void NodeMessage(RegMessage_Z& a1, bool a2);
 
 private:
-    int m_ViewportId;
+    S32 m_ViewportId;
     Rtc_ZHdl m_RtcHdl;
     RtcPlayer_ZHdl m_RtcPlayerHdl;
 END_AGENT_CLASS
