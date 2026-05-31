@@ -5,7 +5,7 @@
 #include "Types_Z.h"
 #include "String_Z.h"
 Extern_Z "C" int strncmp(const char* str1, const char* str2, int n);
-Extern_Z "C" size_t strlen(const char* str);
+Extern_Z "C" U32 strlen(const char* str);
 Extern_Z "C" Float atof(const char* str);
 Extern_Z "C" int stricmp(const char* String1, const char* String2);
 
@@ -92,8 +92,8 @@ Bool Console_Z::NewCommand(const Char* i_CommandStr, U32 i_Depth) {
     return InterpCommandLine(i_CommandStr, i_Depth);
 }
 
-void Console_Z::PushCommand(const Char* i_CommandLine, Bool i_Unk) {
-    m_Interp->PushCommand(i_CommandLine, i_Unk);
+void Console_Z::PushCommand(const Char* i_CommandLine, Bool i_TopOfStack) {
+    m_Interp->PushCommand(i_CommandLine, i_TopOfStack);
 }
 
 S32 Console_Z::NbPushedCommand() {
@@ -125,7 +125,7 @@ Bool Console_Z::InterpCommand(const Char* i_CommandStr, U32 i_Depth) {
 #endif
     String_Z<1024> l_CommandStack[16];
 
-    if (strlen(i_CommandStr) == FALSE) {
+    if ((U32)strlen(i_CommandStr) == FALSE) {
         return FALSE;
     }
 

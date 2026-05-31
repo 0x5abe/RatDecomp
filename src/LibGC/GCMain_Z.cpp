@@ -7,7 +7,6 @@ GCGlobals gData;
 
 Extern_Z void GetFlagsFromGame();
 Extern_Z void MathInitTables();
-Extern_Z Char* strcpy(Char* __dest, Char* __src);
 
 Extern_Z "C" void OSInit();
 Extern_Z "C" void DVDInit();
@@ -42,6 +41,10 @@ void PrintMemoryStatus(Char* i_Comment) {
     OSReport("\n\n");
 }
 
+S32 ConsoleConfiguration::GetAspectRatio() {
+    return 0;
+}
+
 void InitProgram(int i_Argc, Char** i_Argv) {
     OSInit();
     ExceptionHandler();
@@ -58,4 +61,9 @@ void InitProgram(int i_Argc, Char** i_Argv) {
     MathInitTables();
     strcpy(gData.m_AliasPath, ".\\");
     DVDInit();
+}
+
+LanguageEnum_Z ConsoleConfiguration::GetLanguage() {
+    // TODO: Implement
+    return LANG_NONE;
 }

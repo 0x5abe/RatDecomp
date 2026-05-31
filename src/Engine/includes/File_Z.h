@@ -34,6 +34,8 @@ public:
 
     void* GetBuf() { return m_Buffer; }
 
+    static Bool DoFileExists(const Char* i_FilePath);
+
 private:
     FileHdl_Z m_Hdl;
     Char* m_Buffer;

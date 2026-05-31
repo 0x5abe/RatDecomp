@@ -2,33 +2,39 @@
 #define _TRIANGLECACHE_Z_H_
 #include "DynArray_Z.h"
 #include "BaseObject_Z.h"
+#include "SystemObject_Z.h"
+
+#define COL_TRI_OWNER_COUNT 256
+#define COL_TRI_CACHE_SIZE 1024
+#define COL_TRI_OWNER_LOOKUP_SIZE 8192
+
+class Patch;
 
 struct TriInfos {
-    U8 m_UnkBytes_0x0[0x120];
+    CollisionFastTriangle_Z m_Tri;
+    S32 m_NextIdx;
 };
 
-typedef DynArray_Z<TriInfos, 32, FALSE, FALSE>
-    TriInfosDA;
+typedef DynArray_Z<TriInfos, 32, FALSE, FALSE> TriInfosDA;
 
 struct OwnerTInfos {
-    S32 m_UnkS32_0x0;
-    S32 m_UnkS32_0x4;
-    S32 m_UnkS32_0x8;
+    U32 m_NodeNameId;
+    Patch* m_DataPtr;
+    U32 m_TriIdx;
 };
 
-typedef DynArray_Z<OwnerTInfos, 32, FALSE, FALSE>
-    OwnerTInfosDA;
+typedef DynArray_Z<OwnerTInfos, 32, FALSE, FALSE> OwnerTInfosDA;
 
 class ColTriangleCache_Z {
-    S32 m_UnkCount;
-    S32 m_UnkCount2;
-    TriInfosDA m_TriInfos;
-    U16DA m_UnkU16DA_0x10;
-    S32 m_UnkS32_0x18;
-    S32 m_UnkS32_0x1c;
-    OwnerTInfosDA m_TriOwnerInfos;
-    S32 m_UnkS32_0x28;
-    S32 m_UnkS32_0x2c;
+    S32 m_FreeTriangleCount;
+    S32 m_FreeTriangleListHead;
+    TriInfosDA m_TriPool;
+    U16DA m_OwnerLookup;
+    S32 m_EvictionScanIndex;
+    S32 m_NextInsertOwnerIndex;
+    OwnerTInfosDA m_Owners;
+    S32 m_OwnerHashMask;
+    S32 m_OwnerIndexMask;
 
 public:
     ColTriangleCache_Z() {

@@ -15,7 +15,6 @@ public:
     DynArray_Z<BaseObject_ZHdl, 32> m_LinkedResourceDA;
 };
 
-/* sizeof(ResourceObject_Z) == 0x14 */
 class ResourceObject_Z : public BaseObject_Z {
 public:
     ResourceObject_Z() { };

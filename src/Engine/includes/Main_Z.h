@@ -1,9 +1,11 @@
 #ifndef _MAIN_Z_H_
 #define _MAIN_Z_H_
+#include "Error_Z.h"
 #include "Name_Z.h"
 #include "String_Z.h"
 #include "DebugTools_Z.h"
 #include "Types_Z.h"
+#include "Language_Z.h"
 
 #define WhereAmI_Z(wai) strcpy(WhereAmI, "_CoreMainLoop(): " wai)
 
@@ -29,7 +31,6 @@
         }                                                                                                        \
     } while (0)
 
-Extern_Z Char* strcpy(Char* __dest, Char* __src);
 Extern_Z "C" void memset(void* __s, S32 __c, U32 __n);
 
 // Extern Platform Functions
@@ -64,8 +65,6 @@ Bool BSource();
 Bool SetFrame();
 Bool Help();
 Bool Pause();
-Bool SetDBPath();
-Bool SetDFPath();
 Bool LoadObjectLib();
 Bool RemoveObjectLib();
 Bool LoadMaterialLib();
@@ -80,8 +79,6 @@ Bool InitRandomSeed();
 Bool SetBlockFrame();
 Bool SetTimeFactor();
 Bool PrintFreeMem();
-Bool SetBFPath();
-Bool EnableBF();
 Bool AddJoyStick();
 
 // Forward declarations
@@ -188,8 +185,8 @@ public:
     Bool m_UnPauseRequested;
     String_Z<ARRAY_CHAR_MAX> m_DBPath;
     String_Z<ARRAY_CHAR_MAX> m_DFPath;
-    String_Z<ARRAY_CHAR_MAX> m_UnkString_0x29d;
-    String_Z<ARRAY_CHAR_MAX> m_UnkString_0x39d;
+    String_Z<ARRAY_CHAR_MAX> m_BFPathList;
+    String_Z<ARRAY_CHAR_MAX> m_BFMatchList;
     String_Z<ARRAY_CHAR_MAX> m_AppPath;
     String_Z<ARRAY_CHAR_MAX> m_UnkString_0x59d;
     String_Z<ARRAY_CHAR_MAX> m_LocalSavePath; // In Roaming on windows
@@ -197,8 +194,7 @@ public:
     U32 m_MaterialFlag; // Which channels of materials are enabled
     U32 m_GameFlag;
     U32 m_Unk_0x7ac;
-    U32 m_UnkError_0x7b0;
-    U32 m_UnkError_0x7b4;
+    U64 m_ErrorCodes;
     U32 m_FrameCount;
     Float m_Timer;
     U32 m_Unk_0x7c0;
@@ -242,8 +238,7 @@ public:
         m_LocalSavePath.StrCpy("Ace");
         m_FrameCount = 0;
         m_Unk_0x7ac = 0;
-        m_UnkError_0x7b4 = 0;
-        m_UnkError_0x7b0 = 0;
+        m_ErrorCodes = ERROR_CODE_NONE;
         m_Running = FALSE;
         m_BlockFrame = FALSE;
         m_UnPauseRequested = FALSE;
@@ -258,6 +253,13 @@ public:
         m_TimeFactor = 1.0f;
         m_Unk_0x7c0 = 0;
     }
+};
+
+class ConsoleConfiguration {
+public:
+    static LanguageEnum_Z GetLanguage();
+    // $SABE: Probably returns an enum
+    static S32 GetAspectRatio();
 };
 
 #endif

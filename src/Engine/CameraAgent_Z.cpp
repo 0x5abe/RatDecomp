@@ -1,5 +1,6 @@
 #include "CameraAgent_Z.h"
 #include "ABC_Message_Engine.h"
+#include "Renderer_Z.h"
 
 // clang-format off
 
@@ -25,3 +26,8 @@ BEGIN_BEHAVIOR
 END_BEHAVIOR
 
 // clang-format on
+
+CameraAgent_Z::CameraAgent_Z() {
+    m_Flags |= FL_AGENT_CAMERA;
+    m_ViewportId = NONE_VIEWPORT;
+}

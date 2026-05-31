@@ -11,7 +11,7 @@ Node_Z::Node_Z()
     m_Prev = NULL;
     m_Next = NULL;
     m_Object = NULL;
-    m_ObjDatas = NULL;
+    m_ObjectDatas = NULL;
     m_UserDefine = NULL;
     m_LightData = NULL;
     m_HFogData = NULL;

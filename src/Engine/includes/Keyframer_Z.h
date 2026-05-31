@@ -593,7 +593,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyFlag_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyFlag_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerHdl_Z {
@@ -640,7 +640,7 @@ public:
     void UpdateLinks();
 
 private:
-    DynArray_Z<KeyHdl_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyHdl_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerFloat_Z : public Keyframer_Z {
@@ -657,7 +657,7 @@ public:
         return m_Keys[i];
     }
 
-    inline DynArray_Z<KeyFloat_Z, 16, 0, 0>& GetKeys() {
+    inline DynArray_Z<KeyFloat_Z, 16, FALSE, FALSE>& GetKeys() {
         return m_Keys;
     }
 
@@ -691,7 +691,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyFloat_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyFloat_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerFloatComp_Z : public Keyframer_Z {
@@ -712,7 +712,7 @@ public:
         return m_Keys[i];
     }
 
-    inline DynArray_Z<KeyFloatComp_Z, 16, 0, 0>& GetKeys() {
+    inline DynArray_Z<KeyFloatComp_Z, 16, FALSE, FALSE>& GetKeys() {
         return m_Keys;
     }
 
@@ -746,7 +746,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyFloatComp_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyFloatComp_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerFloatLinear_Z : public Keyframer_Z {
@@ -797,7 +797,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyFloatLinear_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyFloatLinear_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerFloatLinearComp_Z : public Keyframer_Z {
@@ -852,7 +852,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyFloatLinearComp_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyFloatLinearComp_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerRot_Z {
@@ -899,7 +899,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyRot_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyRot_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerBezierRot_Z {
@@ -945,7 +945,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyBezierRot_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyBezierRot_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec3f_Z : public Keyframer_Z {
@@ -994,7 +994,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyVec3f_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec3f_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec3fComp_Z : public Keyframer_Z {
@@ -1045,7 +1045,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyVec3fComp_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec3fComp_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec3fLinear_Z : public Keyframer_Z {
@@ -1100,7 +1100,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyVec3fLinear_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec3fLinear_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerExtVec3f_Z : public Keyframer_Z {
@@ -1149,7 +1149,7 @@ public:
     void Load(void** i_Data);
 
 private:
-    DynArray_Z<KeyExtVec3f_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyExtVec3f_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec2fLinear_Z : public Keyframer_Z {
@@ -1205,7 +1205,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyVec2fLinear_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec2fLinear_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec2fLinearComp_Z : public Keyframer_Z {
@@ -1256,7 +1256,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyVec2fLinearComp_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec2fLinearComp_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec4fLinear_Z : public Keyframer_Z {
@@ -1311,7 +1311,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyVec4fLinear_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec4fLinear_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 class KeyframerVec4fLinearComp_Z : public Keyframer_Z {
@@ -1362,7 +1362,7 @@ public:
     }
 
 private:
-    DynArray_Z<KeyVec4fLinearComp_Z, 16, 0, 0> m_Keys;
+    DynArray_Z<KeyVec4fLinearComp_Z, 16, FALSE, FALSE> m_Keys;
 };
 
 #endif // _KEYFRAMER_Z_H_

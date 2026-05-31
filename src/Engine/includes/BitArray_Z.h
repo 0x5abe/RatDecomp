@@ -3,7 +3,6 @@
 #include "DynArray_Z.h"
 #include "Types_Z.h"
 
-/* sizeof(BitArray_Z) == 0xC*/
 class BitArray_Z {
 public:
     U32DA m_BitsDA;

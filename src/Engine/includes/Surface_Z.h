@@ -26,7 +26,7 @@ struct Edge {
 class Surface_Z : public Points_Z {
 public:
     U8 m_Pad[24];
-    DynArray_Z<Edge, 32, 0, 1, 4> m_EdgeTab;
+    DynArray_Z<Edge, 32, FALSE, TRUE, 4> m_EdgeTab;
 
     void GetQuadPatchCtrlPoint(const Patch& i_Patch, QuadCtrlPoint_Z& o_QuadCtrlPoint);
 

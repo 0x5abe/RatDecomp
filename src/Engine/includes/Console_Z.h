@@ -134,7 +134,7 @@ public:
     Bool InterpCommandLine(const Char* i_CommandStr, U32 i_Depth);
     void InterpFile();
     Bool NewCommand(const Char* i_CommandStr, U32 i_Depth);
-    void PushCommand(const Char* i_CommandLine, Bool i_Unk);
+    void PushCommand(const Char* i_CommandLine, Bool i_TopOfStack = FALSE);
     S32 NbPushedCommand();
     Bool InterpCommand(const Char* i_CommandStr, U32 i_Depth = 0);
     Bool InterpFloat(const Char* i_CommandStr, Float& o_Value);
@@ -190,6 +190,7 @@ public:
     virtual void MessageError(Bool a1, U64 a2, const Char* a3, va_list& i_Args);
 
     static void PrintBoxString(const Char*, const Char*, ...);
+    static void PrintErrorString(U64 i_ErrorCode, const Char* i_Format, ...);
 };
 
 #endif

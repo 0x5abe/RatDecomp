@@ -36,7 +36,7 @@ public:
     }
 
 private:
-    DynArray_Z<List_Ele, 32, 0, 1, 4> m_LRUList;
+    DynArray_Z<List_Ele, 32, FALSE, TRUE, 4> m_LRUList;
 };
 
 template <class T>

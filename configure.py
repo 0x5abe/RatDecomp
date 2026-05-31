@@ -713,7 +713,7 @@ config.libs = [
         "cflags": cflags_rat_base,
         "progress_category": ["engine", "rat"],  # str | List[str]
         "objects": [
-            Object(NonMatching, "Engine/InGameDatas_Z.cpp"),
+            Object(Matching, "Engine/InGameDatas_Z.cpp"),
             Object(NonMatching, "Engine/ObjectBankManager_Z.cpp",extra_cflags=["-O4,s","-inline off"]),
             Object(NonMatching, "Engine/GameManager_Z.cpp"),
             Object(NonMatching, "Engine/Math_Z.cpp"),
@@ -752,7 +752,7 @@ config.libs = [
             Object(Matching,    "Engine/Manipulator_Z.cpp"),
             Object(Matching,    "Engine/Parameters_Z.cpp"),
             Object(NonMatching, "Engine/MovieManipulator_Z.cpp"),
-            Object(NonMatching, "Engine/Language_Z.cpp"),
+            Object(Matching,    "Engine/Language_Z.cpp"),
             Object(NonMatching, "Engine/SkelLoad_Z.cpp"),
             Object(NonMatching, "Engine/Emiter_Z.cpp"),
             Object(NonMatching, "Engine/ErrorLanguage_Z.cpp"),
@@ -940,7 +940,7 @@ config.libs = [
             Object(NonMatching, "Engine/World_Z.cpp"),
             Object(NonMatching, "Engine/MaterialObj_Z.cpp"),
             Object(NonMatching, "Engine/MaterialManager_Z.cpp"),
-            Object(NonMatching, "Engine/TriangleCache_Z.cpp"),
+            Object(Matching,    "Engine/TriangleCache_Z.cpp"),
             Object(Matching,    "Engine/Random_Z.cpp"),
             Object(NonMatching, "Engine/SurfaceLoad_Z.cpp"),
             Object(NonMatching, "Engine/LodMoveCollShadow_Z.cpp"),

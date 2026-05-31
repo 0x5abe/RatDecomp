@@ -4,6 +4,18 @@
 
 class UserDefineCmd_Z {
 public:
+    UserDefineCmd_Z() {
+        m_UserDatas = NULL;
+        m_DataSize = 0;
+    }
+
+    ~UserDefineCmd_Z() {
+        if (m_UserDatas) {
+            Free_Z(m_UserDatas);
+            m_DataSize = 0;
+        }
+    }
+
     void SetCmd(Char* i_UserDatas, S32 i_DataSize) {
         if (i_DataSize == -1) {
             m_DataSize = strlen(i_UserDatas);

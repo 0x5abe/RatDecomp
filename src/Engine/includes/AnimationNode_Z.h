@@ -86,6 +86,6 @@ public:
     }
 };
 
-typedef DynArray_Z<AnimationNodeModifier_Z, 1, 0, 0, 4> AnimationNodeModifier_ZDA;
+typedef DynArray_Z<AnimationNodeModifier_Z, 1, FALSE, FALSE> AnimationNodeModifier_ZDA;
 
 #endif // _ANIMATIONNODE_Z_H_

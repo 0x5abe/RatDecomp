@@ -153,11 +153,6 @@ public:
 
     void Insert(int i_Index, const T& i_Ele) {
         DYNARRAY_Z_EXP(m_ArrayPtr == NULL || !(&i_Ele >= m_ArrayPtr && &i_Ele < m_ArrayPtr + (INT_PTR_Z)GetSize()));
-
-        if (i_Index == (int)m_Size) {
-            Add(i_Ele);
-            return;
-        }
         DYNARRAY_Z_EXP(i_Index < (int)m_Size && i_Index >= 0);
         if (!m_ReservedSize) {
             DYNARRAY_Z_EXP(Granularity <= DYA_RSVSIZEMAX);
@@ -175,10 +170,6 @@ public:
     }
 
     void Insert(int i_Index) {
-        if (i_Index == (int)m_Size) {
-            Add();
-            return;
-        }
         DYNARRAY_Z_EXP(i_Index < (int)m_Size && i_Index >= 0);
         if (!m_ReservedSize) {
             DYNARRAY_Z_EXP(Granularity <= DYA_RSVSIZEMAX);
@@ -239,8 +230,8 @@ private:
         }
     }
 
-    U32 m_ReservedSize : 14,
-        m_Size : 18;
+    U32 m_ReservedSize : DYA_RSVSIZEBITS,
+        m_Size : DYA_SIZEBITS;
     T* m_ArrayPtr;
 };
 

@@ -10,42 +10,6 @@
 class Material_Z;
 class WaterHeightMap_Z;
 
-// Used for shaders and other material specific rendering logic
-enum MaterialCode_Z {
-    FL_MTL_CODE_DIFFUSE = 0,
-    FL_MTL_CODE_TRANSFORM = 1, // Set to use alpha mask for envmap (maybe not this name)
-    FL_MTL_CODE_UNK2 = 2,
-    FL_MTL_CODE_UNK3 = 3,
-    FL_MTL_CODE_UNK4 = 4,
-    FL_MTL_CODE_EAU = 5, // Water
-    FL_MTL_CODE_LAYER = 6,
-    FL_MTL_CODE_EAU_DYNAMIC = 7, // Dynamic water
-    FL_MTL_CODE_WATER_OCEAN = 8,
-    FL_MTL_CODE_UNK9 = 9,
-    FL_MTL_CODE_UNK10 = 10,
-    FL_MTL_CODE_UNK11 = 11,
-    FL_MTL_CODE_BLOOM = 12,
-    FL_MTL_CODE_UNK13 = 13,
-    FL_MTL_CODE_UNK14 = 14,
-    FL_MTL_CODE_SONAR = 15,
-    FL_MTL_CODE_STENCIL = 16,
-    FL_MTL_CODE_UNK17 = 17,
-    FL_MTL_CODE_UNK18 = 18,
-    FL_MTL_CODE_UNK19 = 19,
-    FL_MTL_CODE_UNK20 = 20,
-    FL_MTL_CODE_UNK21 = 21,
-    FL_MTL_CODE_UNK22 = 22,
-    FL_MTL_CODE_UNK23 = 23,
-    FL_MTL_CODE_UNK24 = 24,
-    FL_MTL_CODE_UNK25 = 25,
-    FL_MTL_CODE_UNK26 = 26,
-    FL_MTL_CODE_UNK27 = 27,
-    FL_MTL_CODE_UNK28 = 28,
-    FL_MTL_CODE_LAST = 29
-};
-
-#define FL_MTL_CODE_ALL (FL_MTL_CODE_TRANSFORM | FL_MTL_CODE_UNK2 | FL_MTL_CODE_UNK4 | FL_MTL_CODE_WATER_OCEAN | FL_MTL_CODE_STENCIL)
-
 class MaterialUser_Z {
 public:
     virtual void Release() = 0;
@@ -199,6 +163,10 @@ public:
 
     inline Bool IsAlphaBlended() const {
         return ((GetRenderFlag() & FL_IS_ALPHABLENDED) != 0);
+    }
+
+    inline Bool IsTwoSided() const {
+        return ((GetRenderFlag() & FL_TWO_SIDE) != 0);
     }
 
     inline U32 GetCollisionFlag() const {

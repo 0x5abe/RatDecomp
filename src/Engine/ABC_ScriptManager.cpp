@@ -12,6 +12,7 @@
 #include "AnimationManager_Z.h"
 #include "SoundManager_Z.h"
 #include "File_Z.h"
+#include "Types_Z.h"
 
 Extern_Z "C" Char* strstr(Char* str, const char* substr);
 static Name_Z InHeritName(Name_Z::GetID("ABC_Agent", 0));
@@ -314,7 +315,7 @@ void ABC_ScriptManager::ReadEnumFromFile(Char const* i_Path, Char const* i_EnumK
 
                 l_Pos = strstr(l_Str, "*/");
                 if (l_Pos != NULL) {
-                    S32 l_Len = strlen(l_Pos) - 2;
+                    U32 l_Len = strlen(l_Pos) - 2;
 
                     strncpy(l_Str, l_Pos + 2, l_Len);
                     l_Str[l_Len] = '\0';
@@ -322,8 +323,8 @@ void ABC_ScriptManager::ReadEnumFromFile(Char const* i_Path, Char const* i_EnumK
                     break;
                 }
             }
-
-            if (!strlen(l_Str)) continue;
+            U32 l_Len = strlen(l_Str);
+            if (!l_Len) continue;
         }
         else if (strstr(l_Str, "//") != NULL) {
             Char l_C;
@@ -341,7 +342,7 @@ void ABC_ScriptManager::ReadEnumFromFile(Char const* i_Path, Char const* i_EnumK
             continue;
         }
 
-        S32 l_Len = strlen(l_Str) - 1;
+        U32 l_Len = strlen(l_Str) - 1;
         Char* l_Ch = &l_Str[l_Len];
 
         while (*l_Ch == ' ' || *l_Ch == '\t' || *l_Ch == ',') {

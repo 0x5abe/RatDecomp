@@ -5,17 +5,9 @@
 #include "Sys_Z.h"
 #include "Types_Z.h"
 
-UserDefine_Z::UserDefine_Z() {
-    m_Cmd.m_UserDatas = NULL;
-    m_Cmd.m_DataSize = 0;
-}
+UserDefine_Z::UserDefine_Z() { }
 
-UserDefine_Z::~UserDefine_Z() {
-    if (&m_Cmd.m_UserDatas != NULL && m_Cmd.m_UserDatas) {
-        Free_Z(m_Cmd.m_UserDatas);
-        m_Cmd.m_DataSize = 0;
-    }
-}
+UserDefine_Z::~UserDefine_Z() { }
 
 void UserDefineCmd_Z::MakeCommandList() {
     Char* l_CurrentChar;

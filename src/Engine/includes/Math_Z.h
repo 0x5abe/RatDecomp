@@ -65,10 +65,10 @@ union UDummy { // $SABE: U dummy!
 struct Vec2f {
     Float x, y;
 
-    Vec2f() {};
+    Vec2f() { };
     Vec2f(Float i_x, Float i_y)
         : x(i_x)
-        , y(i_y) {};
+        , y(i_y) { };
 
     Vec2f& Set(Float i_x, Float i_y) {
         x = i_x;
@@ -161,7 +161,7 @@ Extern_Z const Vec2f VEC2F_NULL;
 struct Vec3f {
     Float x, y, z;
 
-    Vec3f() {};
+    Vec3f() { };
     Vec3f(const Color& i_Color);
     Vec3f(const Quat& i_Quat);
 
@@ -310,7 +310,7 @@ inline Vec3f operator*(Float i_Factor, const Vec3f& i_Vec) {
 struct Vec3i {
     S32 x, y, z;
 
-    Vec3i() {};
+    Vec3i() { };
 
     Vec3i(S32 i_x, S32 i_y, S32 i_z) {
         x = i_x;
@@ -380,17 +380,17 @@ struct Vec3i {
 struct Vec4i {
     S32 x, y, z, w;
 
-    Vec4i() {};
+    Vec4i() { };
     Vec4i(S32 i_x, S32 i_y, S32 i_z, S32 i_w)
         : x(i_x)
         , y(i_y)
         , z(i_z)
-        , w(i_w) {};
+        , w(i_w) { };
     Vec4i(const Vec3i& i_v)
         : x(i_v.x)
         , y(i_v.y)
         , z(i_v.z)
-        , w(1) {};
+        , w(1) { };
 
     Vec4i operator+(const Vec4i& i_v) const { return Vec4i(x + i_v.x, y + i_v.y, z + i_v.z, w + i_v.w); }
 

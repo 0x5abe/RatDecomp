@@ -79,6 +79,7 @@
 #include "SurfaceCache_Z.h"
 #include "TriangleCache_Z.h"
 #include "Timer_Z.h"
+#include "KSys_Z.h"
 
 Extern_Z "C" void exit(int);
 

@@ -23,6 +23,7 @@ public:
 
     S32 m_InputNum;
     S32 m_ViewportId;
+    S32 m_UnkS32_0x28;
 };
 
 #endif // _CAMERAUSER_Z_H_

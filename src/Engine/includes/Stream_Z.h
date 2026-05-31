@@ -3,6 +3,8 @@
 #include "Types_Z.h"
 #include "BaseStream_Z.h"
 
+#define STR_FILE_ERROR_NONE 0
+
 struct StrBuffer {
     void* m_RealPtr;
     void* m_AlignedPtr;
@@ -13,6 +15,8 @@ struct StrBuffer {
 };
 
 class Stream_Z : public BaseStream_Z {
+    friend class StreamFile_Z;
+
 public:
     Stream_Z()
         : m_LoadStage(0)

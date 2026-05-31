@@ -6,6 +6,7 @@
 Extern_Z "C" U32 strlen(const Char* str);
 Extern_Z "C" char* strupr(Char* str);
 Extern_Z "C" int strcmp(const Char* str1, const Char* str2);
+Extern_Z "C" int strncmp(const Char* str1, const Char* str2, int n);
 Extern_Z "C" int strcpy(Char* dest, const Char* src);
 Extern_Z "C" int strcat(Char* dest, const Char* src);
 Extern_Z "C" int vsprintf(const Char* i_Buf, const Char* i_Format, va_list i_Args);
@@ -23,6 +24,10 @@ public:
     void Empty() {
         m_Str[0] = 0;
     }
+
+    const Char* Get() const { return m_Str; }
+
+    Char* Get() { return m_Str; }
 
     void StrCpy(const Char* i_Str) { strcpy(m_Str, i_Str); }
 
@@ -62,14 +67,16 @@ public:
         return strncpy(m_Str, i_Src, i_Count);
     }
 
-    int Sprintf(const Char* i_Format, ...) {
+    void Sprintf(const Char* i_Format, ...) {
         va_list l_Args;
-        va_start(l_Args, i_Format);
 
+        
+        ASSERTLE_Z(i_Format != Get(),"",30,"_Str!=Get()");
+        va_start(l_Args, i_Format);
         vsprintf(m_Str, i_Format, l_Args);
 
         va_end(args);
-        return 0;
+        return;
     }
 
     Char* Upr() {
@@ -82,6 +89,10 @@ public:
 
     S32 StrCmp(const Char* i_Str) const {
         return strcmp(m_Str, i_Str);
+    }
+
+    S32 StrnCmp(const Char* i_Str, S32 i_N) const {
+        return strncmp(m_Str, i_Str, i_N);
     }
 
     inline Char& operator[](S32 i_Index) {

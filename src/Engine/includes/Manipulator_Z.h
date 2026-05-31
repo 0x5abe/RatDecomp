@@ -41,7 +41,9 @@ class ManipulatorDraw_Z : public Manipulator_Z {
 public:
     ManipulatorDraw_Z();
     virtual void Init();
-    virtual ~ManipulatorDraw_Z();
+
+    virtual ~ManipulatorDraw_Z() { }
+
     virtual void Update(Float i_DeltaTime);
     virtual void Draw(const Viewport_Z* i_Vp);
     virtual void Draw(const DrawInfo_Z& i_DrawInfo);

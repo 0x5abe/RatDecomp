@@ -20,7 +20,6 @@ enum abc_agentState {
     agent_last
 }; // Jimmy DWARF
 
-/* sizeof(ABC_Agent) == 0x40 */
 class ABC_Agent : public BaseObject_Z {
     friend class ABC_AgentList_Z;
     friend class ABC_ScriptManager;

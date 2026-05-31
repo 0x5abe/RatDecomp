@@ -5,9 +5,36 @@
 #include "Streaming_Z.h"
 #include "ClassManager_Z.h"
 #include "DynPtrArray_Z.h"
+#include "Types_Z.h"
 
 #define STR_FILE_LOAD_STAGE_ABORT -1
 #define STR_FILE_LOAD_STAGE_INIT 0
+
+struct BlockDescription_Z {
+    U32 m_ObjectCount;
+    U32 m_PaddedSize;
+    U32 m_DataSize;
+    U32 m_WorkingBufferOffset;
+    Name_Z m_FirstResourceName;
+    U32 m_BlockHash;
+};
+
+struct BigFileHeader_Z {
+    Char m_VersionString[ARRAY_CHAR_MAX];
+    U32 m_IsNotRtc;
+    U32 m_BlockCount;
+    U32 m_WorkingBufferCapacityEven;
+    U32 m_WorkingBufferCapacityOdd;
+    U32 m_PaddedSize;
+    U32 m_VersionPatch;
+    U32 m_VersionMinor;
+    U32 m_UnkS32_0x11c;
+    BlockDescription_Z m_Blocks[64];
+    U32 m_UnkS32_0x720;
+    U32 m_PoolManifestPaddedSize;
+} Aligned_Z(2048);
+
+#define g_BigFileHeader ((BigFileHeader_Z&)StreamFile_Z::gBigFileHeader)
 
 class StreamFile_Z : public Manipulator_Z {
 public:
@@ -40,6 +67,8 @@ private:
     S32 m_CurResourceIdx;
     S32 m_UnkS32_0x174;
     Bool m_RestoreVSync;
+
+    static U8 gBigFileHeader[sizeof(BigFileHeader_Z)];
 };
 
 #endif // _STREAMFILE_Z_H_

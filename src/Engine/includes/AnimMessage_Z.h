@@ -13,7 +13,7 @@ class AnimatedAgent_Z;
 class Message_Z;
 class KeyframerMessage_Z;
 
-typedef DynArray_Z<Message_Z, 4, 0, 1> Message_ZDA;
+typedef DynArray_Z<Message_Z, 4, FALSE, TRUE> Message_ZDA;
 
 struct Message_Z {
     abc_message m_Id;
@@ -95,7 +95,7 @@ public:
         return m_Messages[i_Index];
     }
 
-    inline DynArray_Z<Message_Z, 4, 0, 1>& GetMessages() {
+    inline DynArray_Z<Message_Z, 4, FALSE, TRUE>& GetMessages() {
         return m_Messages;
     }
 

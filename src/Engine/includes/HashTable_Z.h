@@ -67,7 +67,6 @@ public:
     Bool operator!=(const Name_ZHash_Z& i_Elem) { return i_Elem.m_Value != m_Value; }
 };
 
-/* sizeof(HashTableBase_Z) == 0x14*/
 template <class T>
 class HashTableBase_Z {
     BitArray_Z* m_Status;

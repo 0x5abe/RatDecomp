@@ -3,6 +3,7 @@
 #include "Handle_Z.h"
 #include "File_Z.h"
 #include "HashTable_Z.h"
+#include "Types_Z.h"
 
 #define REGISTER_CLASS(a, b, c) gData.ClassMgr->RegisterClass(a, b, c)
 #define REGISTER_CLASS_TYPE(a, b, c) gData.ClassMgr->RegisterClassType(a, b, c)
@@ -103,9 +104,22 @@ public:
         }
     }
 
+    // BigFile methods
+
+    void OpenBigFileName(const String_Z<ARRAY_CHAR_MAX>& i_NameFilePath);
+
     Bool IsBigFileOpened() const { return m_BfOpened; }
 
     Bool IsBigFileRead() const { return m_BfRead; }
+
+    void SetBigFileOpened(Bool i_Opened) {
+        m_BfOpened = i_Opened;
+    }
+
+    void InitBigFile(Bool i_Read) {
+        m_BfRead = i_Read;
+        m_BfCreate = !m_BfRead;
+    }
 
 private:
     // $SABE: Keeping this private to avoid the dumb issue where Name_Z::GetID gets downcasted to S16 instead of it being a Name_Z

@@ -69,9 +69,9 @@ struct AnimationConcatMtl_Z {
     S16 m_TransVNbKfr;
 };
 
-typedef DynArray_Z<AnimationConcat_Z, 32, 0, 0> AnimationConcat_ZDA;
-typedef DynArray_Z<AnimationConcatNode_Z, 32, 0, 0> AnimationConcatNode_ZDA;
-typedef DynArray_Z<AnimationConcatMtl_Z, 32, 0, 0> AnimationConcatMtl_ZDA;
+typedef DynArray_Z<AnimationConcat_Z, 32, FALSE, FALSE> AnimationConcat_ZDA;
+typedef DynArray_Z<AnimationConcatNode_Z, 32, FALSE, FALSE> AnimationConcatNode_ZDA;
+typedef DynArray_Z<AnimationConcatMtl_Z, 32, FALSE, FALSE> AnimationConcatMtl_ZDA;
 
 class Animation_Z : public ResourceObject_Z {
 public:

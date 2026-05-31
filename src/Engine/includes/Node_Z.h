@@ -200,7 +200,7 @@ private:
     Sphere_Z m_BSphere;
     Rect_Z m_DisplaySeadRect;
     Rect_Z m_CollideSeadRect;
-    ObjectDatas_Z* m_ObjDatas;
+    ObjectDatas_Z* m_ObjectDatas;
     Object_Z* m_Object;
     UserDefine_Z* m_UserDefine;
     Node_Z* m_Parent;
