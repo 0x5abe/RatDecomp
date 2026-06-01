@@ -49,7 +49,7 @@ private:
     U8 m_Flag;
     U8 m_Unk0x1D;
     S32 m_XRamBlock;
-    S32 m_SndDatas_Z;
+    void* m_Data;
 };
 
 #endif

@@ -40,6 +40,7 @@ public:
 
     // TODO: When all uses of GetBit (inlined) are decompiled, make it match properly
     inline U32 GetBit(S32 i_Bit) const {
+        U32* l_Bits = m_BitsDA.GetArrayPtr();
         DYNARRAY_Z_EXP(i_Bit < m_Size);
         return m_BitsDA[i_Bit >> 5] & (1 << (i_Bit & 0x1F));
     }

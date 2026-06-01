@@ -121,6 +121,10 @@ public:
         m_BfCreate = !m_BfRead;
     }
 
+    Bool LoadResource(BigFileRsc_Z& i_Resource);
+
+    const Char* GetBigFileHeaderText() const { return m_BfHeaderText; }
+
 private:
     // $SABE: Keeping this private to avoid the dumb issue where Name_Z::GetID gets downcasted to S16 instead of it being a Name_Z
     const BaseObject_ZHdl& NewObject(S16 i_ClassId, const Name_Z& i_Name);

@@ -96,9 +96,8 @@ public:
             m_ReservedSize = Granularity;
             Realloc(m_ReservedSize + m_Size);
         }
-        m_ArrayPtr[m_Size] = i_Ele;
+        m_ArrayPtr[m_Size++] = i_Ele;
         DYNARRAY_Z_EXP(m_Size < DYA_SIZEMAX);
-        m_Size++;
         m_ReservedSize--;
         return m_Size - 1;
     }
@@ -149,9 +148,9 @@ private:
     void Realloc(int i_NewNbElement) {
         if (i_NewNbElement) {
             if (m_ArrayPtr)
-                m_ArrayPtr = (T*)ReallocL_Z(m_ArrayPtr, i_NewNbElement * sizeof(T), 311);
+                m_ArrayPtr = (T*)ReallocL_Z(m_ArrayPtr, i_NewNbElement * sizeof(T), 249);
             else
-                m_ArrayPtr = (T*)AllocAlignL_Z(i_NewNbElement * sizeof(T), 317, Align);
+                m_ArrayPtr = (T*)AllocAlignL_Z(i_NewNbElement * sizeof(T), 255, Align);
             DYNARRAY_Z_EXP(m_ArrayPtr != NULL);
         }
         else {

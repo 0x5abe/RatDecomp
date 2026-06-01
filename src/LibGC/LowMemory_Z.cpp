@@ -9,7 +9,7 @@ Extern_Z "C" void* __sys_alloc(S32 i_Size) {
 };
 
 Extern_Z "C" void __sys_free(void* i_Ptr) {
-    Z_Free(i_Ptr);
+    Free_Z(i_Ptr);
 };
 
 void MemoryManager_Z::Init() {

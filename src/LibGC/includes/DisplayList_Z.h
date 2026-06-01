@@ -24,7 +24,7 @@ class DisplayList_Z : public BaseDisplayList_Z {
 
     ~DisplayList_Z() {
         if (m_Data) {
-            Z_Free(m_Data);
+            Free_Z(m_Data);
         }
         m_Data = NULL;
         m_CurrSize = 0;

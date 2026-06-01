@@ -2,8 +2,7 @@
 #define _STREAM_Z_H_
 #include "Types_Z.h"
 #include "BaseStream_Z.h"
-
-#define STR_FILE_ERROR_NONE 0
+#include "Memory_Z.h"
 
 struct StrBuffer {
     void* m_RealPtr;
@@ -29,6 +28,8 @@ public:
     virtual void Update();
 
     S32 GetErrorCode() const { return m_ErrorCode; }
+
+    S32 GetLoadStage() const { return m_LoadStage; }
 
 private:
     S32 m_LoadStage;

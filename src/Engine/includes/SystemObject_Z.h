@@ -103,7 +103,6 @@ struct CollisionFastTriangle_Z {
     Float m_Edge02LenSq;     // 0xF8
     Float m_NormalLength;    // 0xFC
     Float m_InvNormalLength; // 0x100
-    U8 m_Unk_0x104[0x0C];    // 0x104
 } Aligned_Z(16);
 
 struct TriangleFlag_Z {
