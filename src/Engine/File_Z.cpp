@@ -2,7 +2,7 @@
 #include "Memory_Z.h"
 #include "Sys_Z.h"
 
-Extern_Z "C" int sprintf(char* i_Buf, const char* i_Format, ...);
+ExternC_Z int sprintf(char* i_Buf, const char* i_Format, ...);
 
 File_Z::File_Z() {
     m_Buffer = NULL;
@@ -17,7 +17,7 @@ File_Z::~File_Z() {
 
 void File_Z::Init(S32 i_FileSize, const Char* i_Data) {
     m_Size = i_FileSize;
-    m_Buffer = (Char*)AllocAlignL_Z(ALIGN(m_Size, 32), 33, 32);
+    m_Buffer = (Char*)AllocAlignL_Z(AlignUp_Z(m_Size, 32), 33, 32);
     if (i_Data) {
         Sys_Z::MemCpyFrom(m_Buffer, (Char*)i_Data, m_Size);
     }
@@ -56,7 +56,7 @@ Bool File_Z::Open(const Char* i_FilePath, U32 i_Flags) {
             return FALSE;
         }
 
-        m_Buffer = (Char*)AllocAlignL_Z(ALIGN(m_Size, 32), 69, 32);
+        m_Buffer = (Char*)AllocAlignL_Z(AlignUp_Z(m_Size, 32), 69, 32);
         m_Hdl.Read(m_Buffer, m_Size);
         m_Hdl.Close();
         m_CurPos = 0;

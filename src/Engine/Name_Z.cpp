@@ -3,7 +3,7 @@
 #include "Types_Z.h"
 Extern_Z U8 g_ChartoLower[256];
 Extern_Z Float Random();
-Extern_Z "C" void OSReport(const char* msg, ...);
+ExternC_Z void OSReport(const char* msg, ...);
 
 // clang-format off
 S32 Crc32Tab[] = {

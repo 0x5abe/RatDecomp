@@ -198,11 +198,11 @@ public:
     virtual void Draw(DrawInfo_Z& i_DrawInfo);
     virtual void Minimize();
     virtual void ClearMark();
-    virtual void InvalidClassSize(S16 const a1);
+    virtual void InvalidClassSize(S16 const a1) const;
     virtual void RemoveResource(const BaseObject_ZHdl& a1);
     virtual S32 ChangeHandleName(const BaseObject_ZHdl& i_Hdl, const Name_Z& i_Name);
     virtual void DeleteHandle(const BaseObject_ZHdl& a1);
-    virtual void GetNameStrFromId(const Name_Z& a1);
+    virtual void GetNameStrFromId(const Name_Z& a1) const;
 
     BaseObject_Z* GetPtr(const BaseObject_ZHdl& i_Hdl) const;
     BaseObject_Z* GetPtrXRam(const HandleRec_Z& i_HandleRec) const;

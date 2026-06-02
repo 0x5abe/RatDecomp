@@ -2,7 +2,7 @@
 #include "Memory_Z.h"
 #include "Program_Z.h"
 #include "Renderer_Z.h"
-Extern_Z "C" void* memcpy(void* dest, const void* src, int n);
+ExternC_Z void* memcpy(void* dest, const void* src, int n);
 #pragma dont_inline on
 
 Bitmap_Z::Bitmap_Z() {
@@ -151,7 +151,7 @@ S32 Bitmap_Z::GetDataSize() {
     U8 l_MipmapCount;
     l_DataSize = (GetBytePerPixel() * ((Float)m_SizeY * m_SizeX));
     l_MipmapCount = m_MipmapCount;
-    for (l_MipSize = l_DataSize; l_MipmapCount--; l_MipSize += (l_DataSize + 127) & ~127) {
+    for (l_MipSize = l_DataSize; l_MipmapCount--; l_MipSize += AlignUp_Z(l_DataSize, 128)) {
         l_DataSize >>= 2;
     }
     return l_MipSize;

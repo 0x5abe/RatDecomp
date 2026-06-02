@@ -3,14 +3,14 @@
 #include "Types_Z.h"
 #include "Assert_Z.h"
 
-Extern_Z "C" U32 strlen(const Char* str);
-Extern_Z "C" char* strupr(Char* str);
-Extern_Z "C" int strcmp(const Char* str1, const Char* str2);
-Extern_Z "C" int strncmp(const Char* str1, const Char* str2, int n);
-Extern_Z "C" int strcpy(Char* dest, const Char* src);
-Extern_Z "C" int strcat(Char* dest, const Char* src);
-Extern_Z "C" int vsprintf(const Char* i_Buf, const Char* i_Format, va_list i_Args);
-Extern_Z "C" int strncpy(Char* dest, const Char* src, S32 count);
+ExternC_Z U32 strlen(const Char* str);
+ExternC_Z char* strupr(Char* str);
+ExternC_Z int strcmp(const Char* str1, const Char* str2);
+ExternC_Z int strncmp(const Char* str1, const Char* str2, int n);
+ExternC_Z int strcpy(Char* dest, const Char* src);
+ExternC_Z int strcat(Char* dest, const Char* src);
+ExternC_Z int vsprintf(const Char* i_Buf, const Char* i_Format, va_list i_Args);
+ExternC_Z int strncpy(Char* dest, const Char* src, S32 count);
 Bool fstricmp(const Char* a1, const Char* a2);
 void fsprintfID(Char* a1, U32 a2, U32 a3);
 
@@ -70,8 +70,7 @@ public:
     void Sprintf(const Char* i_Format, ...) {
         va_list l_Args;
 
-        
-        ASSERTLE_Z(i_Format != Get(),"",30,"_Str!=Get()");
+        ASSERTLE_Z(i_Format != Get(), "", 30, "_Str!=Get()");
         va_start(l_Args, i_Format);
         vsprintf(m_Str, i_Format, l_Args);
 

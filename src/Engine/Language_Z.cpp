@@ -8,8 +8,8 @@
 
 static const Char s_Unused_1422[] = "Empty Text";
 
-Extern_Z "C" Char* strstr(Char* str, const char* substr);
-Extern_Z "C" int strcpy(Char* dest, const Char* src);
+ExternC_Z Char* strstr(Char* str, const char* substr);
+ExternC_Z int strcpy(Char* dest, const Char* src);
 
 #define LANG_TO_STRING(Lang) "PATCH_STR_" #Lang
 

@@ -102,6 +102,8 @@ public:
     void SendTimed(abc_message i_Msg, ABC_Agent* i_Agent, Float i_Delay, Float i_Param = UNDEFINED_FVALUE);
     StreamAgent_ZHdl& SetStreamAgent(const Name_Z& i_AgentClassName);
 
+    StreamAgent_ZHdl* GetStreamAgent() { return &m_StreamAgentHdl; }
+
     Float GetTime() { return m_ScriptTime; }
 
     inline void EndPause() {

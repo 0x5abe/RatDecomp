@@ -5,7 +5,7 @@
 #include "DebugTools_Z.h"
 #include "InputEngine_Z.h"
 
-Extern_Z "C" int sprintf(char* i_Buf, const char* i_Format, ...);
+ExternC_Z int sprintf(char* i_Buf, const char* i_Format, ...);
 
 static U32 TrashbinFlag;
 

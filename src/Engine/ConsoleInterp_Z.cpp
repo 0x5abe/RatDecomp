@@ -3,8 +3,8 @@
 #include "Console_Z.h"
 #include "StreamManager_Z.h"
 
-Extern_Z "C" Char* strstr(Char* str, const char* substr);
-Extern_Z "C" Float atof(const char* str);
+ExternC_Z Char* strstr(Char* str, const char* substr);
+ExternC_Z Float atof(const char* str);
 
 void ConsoleInterp_Z::Init() {
     Manipulator_Z::Init();

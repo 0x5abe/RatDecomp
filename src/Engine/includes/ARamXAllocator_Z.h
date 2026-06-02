@@ -22,7 +22,7 @@ public:
             return -1;
         }
 
-        S32 l_Size = (i_Size + (Alignment - 1)) & ~(Alignment - 1);
+        S32 l_Size = AlignUp_Z(i_Size, Alignment);
 
         if (m_FirstFreeBlockIdx == -1) {
             return -1;

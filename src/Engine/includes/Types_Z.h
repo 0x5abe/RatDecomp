@@ -55,7 +55,8 @@ typedef volatile double VDouble;
 #undef _ALLOCDEFAULTALIGN
 #define _ALLOCDEFAULTALIGN 4
 
-#define ALIGN(A, B) (((U32)(A) + (B) - 1) & ~((B) - 1))
+#define AlignUp_Z(A, B) (((U32)(A) + (B) - 1) & ~((B) - 1))
+#define AlignDown_Z(A, B) ((U32)(A) & ~((B) - 1))
 
 #undef Weak_Z
 #ifdef __MWERKS__
@@ -66,6 +67,9 @@ typedef volatile double VDouble;
 
 #undef Extern_Z
 #define Extern_Z extern
+
+#undef ExternC_Z
+#define ExternC_Z extern "C"
 
 #define Aligned_Z(x) __attribute__((aligned(x)))
 #define Packed_Z(x)        \

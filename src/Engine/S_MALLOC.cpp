@@ -243,7 +243,7 @@ void s_Init(void* i_StartOfMemory, U32 i_TotalMemory) {
 
     // Place the allocation-strategy threshold around 4/5 into the arena.
     // The result is aligned down to 8 bytes.
-    BestFitLimit = (U32)i_StartOfMemory + (((i_TotalMemory / 5) * 4) & ~7);
+    BestFitLimit = (U32)i_StartOfMemory + AlignDown_Z((i_TotalMemory / 5) * 4, 8);
 
     // The free-bucket manager is stored at the beginning of the arena itself.
     FreeBuckets = (s_FREE_MEM_BUCKETS*)i_StartOfMemory;

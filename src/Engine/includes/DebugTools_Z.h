@@ -3,7 +3,46 @@
 
 #include "Types_Z.h"
 
+// Commands
+
 void RegisterDebugCommand();
+
+Bool DisplayMemStatus();
+Bool DrawMemGraph();
+Bool DeltaTime();
+Bool ScreenShot();
+Bool SwitchScreenMode();
+Bool SetGammaRamp();
+Bool SetBrightness();
+Bool SetContrast();
+Bool SetGAmma();
+Bool SwapStartButton();
+Bool BoxPatchClip();
+Bool SetPosPerso();
+Bool EnablePopupMenu();
+Bool EnableProfiler();
+Bool EnableDmaProfiler();
+Bool EnableDebugMouse();
+Bool DisableMouseForCamera();
+Bool CleanTempPic();
+Bool DisplayFps();
+Bool EnableVSync();
+Bool DisplayStream();
+Bool DoSkelDynamic();
+Bool DisplayFrame();
+Bool DisableConsole();
+Bool DisableIngameConsole();
+Bool DisableAssert();
+Bool DisableMusic();
+Bool DisableMovie();
+Bool SkipMovie();
+Bool EnableL2R2();
+Bool CheckMemoryEveryFrame();
+Bool NbHandle();
+Bool EnableBloomEffect();
+Bool DrawMemInfos();
+
+// Flags
 
 enum EngineFlags {
     FL_ENGINE_NONE = 0 << 0,
@@ -12,6 +51,7 @@ enum EngineFlags {
     FL_PROFILER = 1 << 2,
     FL_POS_PERSO = 1 << 3,
     FL_DISPLAY_FPS = 1 << 4,
+    FL_DISABLE_CONSOLE = 1 << 6,
     FL_DISABLE_ASSERT = 1 << 7,
     FL_DISABLE_MUSIC = 1 << 8,
     FL_DISABLE_MOVIE = 1 << 9,

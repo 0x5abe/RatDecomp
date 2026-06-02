@@ -75,7 +75,21 @@ struct BigFileRsc_Z {
 class ClassManager_Z : public HandleManager_Z {
 public:
     ClassManager_Z();
-    ~ClassManager_Z();
+
+    virtual void CheckHandles();
+    virtual void Minimize();
+    virtual void ClearMark();
+    virtual void InvalidClassSize(S16 a1) const;
+    virtual void GetNameStrFromId(const Name_Z& a1) const;
+    virtual ~ClassManager_Z();
+    virtual Bool OpenBigFile(const Char* i_BfName, const Name_Z& i_StreamAgentClassName, Bool i_Unused);
+    virtual void CloseBigFile();
+    virtual void OpenBigFileStream(const Char* a1);
+    virtual void CloseBigFileStream();
+    virtual void ShutBigFile();
+    virtual void GetResourceObject(const Char* a1);
+    virtual void AssumeGetResourceObject(const Char* a1);
+    virtual void ExcludeFromSaving(const BaseObject_ZHdl& a1);
 
     void LoadLinkId(void* i_ID, void** i_Data);
     void UpdateLinkFromId(BaseObject_ZHdl& i_Hdl, S32 i_ID);
@@ -88,6 +102,7 @@ public:
     const BaseObject_ZHdl& NewObject(const Name_Z& i_ClassName, const Name_Z& i_Name);
     const BaseObject_ZHdl& NewObject(const Name_Z& i_ClassName);
     const BaseObject_ZHdl& NewObject(const Char* i_ClassName);
+    Name_Z& GetClassName(const BaseObject_ZHdl& i_Hdl);
 
     const BaseObject_ZHdl& NewResource(const Name_Z& i_ClassName, const Name_Z& i_Name);
     Bool GetFile(const Char* i_Path, File_Z& i_File);
@@ -111,6 +126,8 @@ public:
     Bool IsBigFileOpened() const { return m_BfOpened; }
 
     Bool IsBigFileRead() const { return m_BfRead; }
+
+    Bool IsBigFileWrite() const { return m_BfCreate; }
 
     void SetBigFileOpened(Bool i_Opened) {
         m_BfOpened = i_Opened;

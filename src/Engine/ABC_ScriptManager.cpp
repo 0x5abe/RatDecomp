@@ -14,7 +14,7 @@
 #include "File_Z.h"
 #include "Types_Z.h"
 
-Extern_Z "C" Char* strstr(Char* str, const char* substr);
+ExternC_Z Char* strstr(Char* str, const char* substr);
 static Name_Z InHeritName(Name_Z::GetID("ABC_Agent", 0));
 
 void InitEngineScriptClasses() {

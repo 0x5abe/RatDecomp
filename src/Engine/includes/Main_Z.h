@@ -31,7 +31,7 @@
         }                                                                                                        \
     } while (0)
 
-Extern_Z "C" void memset(void* __s, S32 __c, U32 __n);
+ExternC_Z void memset(void* __s, S32 __c, U32 __n);
 
 // Extern Platform Functions
 
@@ -214,6 +214,10 @@ public:
     void EnableEngineFlag(U32 i_Flag) { m_EngineFlag |= i_Flag; }
 
     void DisableEngineFlag(U32 i_Flag) { m_EngineFlag &= ~i_Flag; }
+
+    Bool IsEngineFlag(U32 i_Flag) const { return (m_EngineFlag & i_Flag) != 0; }
+
+    void ToggleEngineFlag(U32 i_Flag) { m_EngineFlag ^= i_Flag; }
 
     void SetMaterialFlag(U32 i_Flag) { m_MaterialFlag = i_Flag; }
 

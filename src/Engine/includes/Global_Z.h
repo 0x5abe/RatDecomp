@@ -12,7 +12,7 @@
 // //#include "GCMain_Z.h"
 
 // Extern_Z Char* strcpy(Char* __dest, Char* __src);
-// Extern_Z "C" void memset(void* __s, S32 __c, U32 __n);
+// ExternC_Z void memset(void* __s, S32 __c, U32 __n);
 // class GCConsole_Z;
 // class ClassManager_Z;
 

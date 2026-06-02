@@ -6,7 +6,7 @@
 
 static Char SndMgrStatusString[ARRAY_CHAR_MAX];
 
-Extern_Z "C" int rand();
+ExternC_Z int rand();
 
 SoundManager_Z::SoundManager_Z() {
     REGISTERCOMMANDC("PlayMUsic", Cmd_PlayMusic, " MusicName");

@@ -4,11 +4,11 @@
 #include "Types_Z.h"
 #include "Error_Z.h"
 
-Extern_Z "C" U32 strlen(const char* str);
-Extern_Z "C" int strncmp(const char* str1, const char* str2, int n);
-Extern_Z "C" Char* strpbrk(const Char* str, const Char* accept);
-Extern_Z "C" int stricmp(const char* String1, const char* String2);
-Extern_Z "C" Char* strstr(Char* str, const char* substr);
+ExternC_Z U32 strlen(const char* str);
+ExternC_Z int strncmp(const char* str1, const char* str2, int n);
+ExternC_Z Char* strpbrk(const Char* str, const Char* accept);
+ExternC_Z int stricmp(const char* String1, const char* String2);
+ExternC_Z Char* strstr(Char* str, const char* substr);
 
 // $SABE TODO: FIX
 void PathKToSys(const Char* i_KName, Char* o_SysName) {

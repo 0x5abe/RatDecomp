@@ -3,7 +3,7 @@
 #include "Memory_Z.h"
 #include <cmath.h>
 
-Extern_Z "C" int rand();
+ExternC_Z int rand();
 
 template <S32 SizeX, S32 SizeY, S32 SizeZ>
 class PerlinArray3D_Z {

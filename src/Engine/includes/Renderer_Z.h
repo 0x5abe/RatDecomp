@@ -212,7 +212,7 @@ enum BitmapType {
 };
 
 class Renderer_Z {
-private:
+protected:
     Viewport_Z m_Viewports[7];
     S8 m_NbViewports;
     S8 m_ActiveViewport;
@@ -315,13 +315,19 @@ public:
     virtual void EndRender(Float i_DeltaTime);
     virtual void Draw(Float i_DeltaTime);
     virtual void WaitEndFrame();
-    virtual void WaitForRetrace(Float a1);
+
+    virtual void WaitForRetrace(Float i_DeltaTime) { }
+
     virtual void CleanAllDatas();
     virtual void Minimize();
     virtual void Draw(S32 i_ViewportId, Float i_DeltaTime);
-    virtual void SetViewMatrix(Bool a1);
+
+    virtual void SetViewMatrix(Bool i_Unk) { }
+
     virtual void DrawTransparent(DrawInfo_Z& i_DrawInfo);
-    virtual void DrawPostRenderEffects(DrawInfo_Z& i_DrawInfo);
+
+    virtual void DrawPostRenderEffects(DrawInfo_Z& i_DrawInfo) { }
+
     virtual void InitViewport(U32 i_NbViewports);
     virtual void ClearZBuffer(S32 a1, S32 a2, S32 a3, S32 a4);
     virtual void ClearFrameBuffer(S32 a1, S32 a2, S32 a3, S32 a4);
@@ -366,7 +372,11 @@ public:
     virtual void GetTextureSize();
     virtual void GetPercentAlloc(S32 a1);
     virtual void MarkHandles();
-    virtual void SetCurrentFogColor(const Vec3f& a1);
+
+    virtual void SetCurrentFogColor(const Vec3f& i_Color) {
+        m_FogColor = i_Color;
+    }
+
     virtual void ApplyDirectionalOnVertex(Vertex3D* a1, Vec3f& a2, LightData_Z& a3);
     virtual void ApplyFogOnVertex(Vertex3D* a1, Vec4f& a2);
     virtual void DrawFace(Vertex3D& a1, Vertex3D& a2, Vertex3D& a3);
