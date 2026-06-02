@@ -88,6 +88,8 @@ public:
         U32 m_RenderFlags;
     };
 
+    void End();
+
     U8* m_CurWritePtr;
     U8* m_CurWriteEnd;
     U8* m_PreviousWritePtr;
@@ -200,16 +202,16 @@ public:
     virtual void Shut();
     virtual void Reset();
     virtual void BeginRender();
-    virtual void EndRender(Float a1);
+    virtual void EndRender(Float i_DeltaTime);
     virtual void Minimize();
-    virtual void Draw(S32 a1, Float a2);
+    virtual void Draw(S32 i_ViewportId, Float i_DeltaTime);
     virtual void DrawTransparent(DrawInfo_Z& a1);
     virtual void ClearZBuffer(S32 a1, S32 a2, S32 a3, S32 a4);
     virtual void ClearFrameBuffer(S32 a1, S32 a2, S32 a3, S32 a4);
     virtual void PushOrder(Float a1);
     virtual void PushDo(U8 a1);
     virtual void PushDs(U16 a1);
-    virtual void SetActiveMaterial(Material_Z* a1);
+    virtual void SetActiveMaterial(Material_Z* i_Material);
     virtual void SetActiveTexture(Bitmap_Z* a1, S32 a2);
     virtual void FreeTexture(S16 a1);
     virtual void GetTextureSize();
@@ -237,6 +239,12 @@ public:
     virtual void SetProfiler(Bool a1);
     virtual void PushADraw(StreamList_Z* a1, BaseDisplayList_Z* a2, S32 a3);
 
+    static void ClearAFrameBuffer(U8* i_Buffer, S32 i_UnkS32);
+    void SetMaterial(Material_Z* i_Material, GXChannelID i_Channel);
+    void SetRenderBlendOp(U32 i_BlendFlag);
+    void DrawState(U16 i_StateFlag);
+    void SetRenderContext(U32 i_ContextFlag);
+    void SetTexture(Bitmap_Z* i_Bitmap, GXTexWrapMode i_WrapS, GXTexWrapMode i_WrapT, GXTexMapID i_TexMapID);
     U16 SortRendererDatas(SortElem_Z* i_SortElems);
 
 private:
@@ -264,8 +272,7 @@ private:
     DisplayList_Z m_VizQueryDisplayLists[32];
     GXLightObj m_CurMainLight;
     GXColor m_CurAmbientColor;
-    Vec3f m_CurObjDatasColor;
-    Float m_CurFadeValue;
+    Vec4f m_CurObjColor;
     S32 m_CurExtraLightCount;
     GXLightObj m_CurExtraLights[3];
     U32 m_UnkU32_0x2a24;

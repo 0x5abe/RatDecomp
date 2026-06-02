@@ -2,7 +2,7 @@
 #include "StreamManager_Z.h"
 #include "Assert_Z.h"
 // $VIOLET: TODO: Actually implement these in file_io.c
-Extern_Z "C" FILE* fopen(const Char* i_FilePath, const Char* i_Mode);
+ExternC_Z FILE* fopen(const Char* i_FilePath, const Char* i_Mode);
 
 Bool FileHdl_Z::Open(const Char* i_FilePath, U32 i_Flags) {
     ASSERTL_Z(!IsOpened(), "", 6);

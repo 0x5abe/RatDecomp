@@ -4,7 +4,7 @@
 #include "os.h"
 #include <string.h>
 
-Extern_Z "C" int sprintf(char* s, const char* format, ...);
+ExternC_Z int sprintf(char* s, const char* format, ...);
 #ifdef DEBUG_Z
 Char ConTemp1[255];
 Char ConTemp2[255];

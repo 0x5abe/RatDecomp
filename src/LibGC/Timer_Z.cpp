@@ -1,7 +1,7 @@
 #include "Timer_Z.h"
 
 Extern_Z U32 CONSOLE_BUS_SPEED : 0x800000F8;
-Extern_Z "C" U32 OSGetTick();
+ExternC_Z U32 OSGetTick();
 Extern_Z Float Random();
 
 void CalibrateTimer() { }

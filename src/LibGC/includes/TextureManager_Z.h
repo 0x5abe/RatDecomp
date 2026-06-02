@@ -18,6 +18,7 @@ public:
 };
 
 class TextureManager_Z {
+public:
     TextureManager_Z();
     ~TextureManager_Z();
     Bool Init(void);

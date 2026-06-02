@@ -2,7 +2,7 @@
 #define _TIMER_Z_H_
 #include "Types_Z.h"
 
-Extern_Z "C" void CalibrateTimer();
+ExternC_Z void CalibrateTimer();
 Float GetAbsoluteTime();
 
 #define FPS_PAL 50.0f

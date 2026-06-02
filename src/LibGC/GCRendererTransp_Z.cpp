@@ -1,6 +1,6 @@
 #include "GCRenderer_Z.h"
 
-Extern_Z "C" void exit(int);
+ExternC_Z void exit(int);
 
 // TODO: Finish matching
 U16 GCRenderer_Z::SortRendererDatas(SortElem_Z* i_List) {

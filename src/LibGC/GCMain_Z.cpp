@@ -8,19 +8,19 @@ GCGlobals gData;
 Extern_Z void GetFlagsFromGame();
 Extern_Z void MathInitTables();
 
-Extern_Z "C" void OSInit();
-Extern_Z "C" void DVDInit();
-Extern_Z "C" void OSReport(const Char* __msg, ...);
-Extern_Z "C" void __start();
+ExternC_Z void OSInit();
+ExternC_Z void DVDInit();
+ExternC_Z void OSReport(const Char* __msg, ...);
+ExternC_Z void __start();
 
-Extern_Z "C" void exit(S32 __status);
-Extern_Z "C" void* OSGetArenaHi();
-Extern_Z "C" void* OSGetArenaLo();
+ExternC_Z void exit(S32 __status);
+ExternC_Z void* OSGetArenaHi();
+ExternC_Z void* OSGetArenaLo();
 
-Extern_Z "C" void* _stack_end;
-Extern_Z "C" void* _stack_addr;
-Extern_Z "C" void* _db_stack_end;
-Extern_Z "C" void* _db_stack_addr;
+ExternC_Z void* _stack_end;
+ExternC_Z void* _stack_addr;
+ExternC_Z void* _db_stack_end;
+ExternC_Z void* _db_stack_addr;
 
 // $SABE: Not fully matching yet, need to fix
 void PrintMemoryStatus(Char* i_Comment) {
