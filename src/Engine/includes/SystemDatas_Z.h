@@ -25,6 +25,14 @@ public:
         return m_DefaultMaterialHdl;
     }
 
+    inline Material_ZHdl& GetBloomMaterial() {
+        return m_BloomMaterialHdl;
+    }
+
+    inline Bitmap_ZHdl& GetWhiteBitmap() {
+        return m_WhiteBitmapHdl;
+    }
+
 private:
     GameObj_ZHdlDA m_ExtGameObjHdls;
     GameObj_ZHdlDA m_GameObjHdls;

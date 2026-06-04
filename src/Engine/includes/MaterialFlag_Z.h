@@ -65,6 +65,7 @@ enum MaterialCode_Z {
 #define FL_MAT_RDR_UNK27 (1 << 27)                                                                                                    // 0x8000000 - Unknown
 #define FL_MAT_RDR_UNK28 (1 << 28)                                                                                                    // 0x10000000 - Unknown
 #define FL_MAT_RDR_UNK29 (1 << 29)                                                                                                    // 0x20000000 - Unknown
+#define FL_RDR_BLEND_MASK (FL_IS_ALPHABLENDED | FL_IS_TRANSPARENT | FL_ADDITIF | FL_SOUSTRACTIF | FL_DESTADDITIF | FL_TWO_SIDE)       // 0x27060 - Blend/cull-related material flags cached by SetRenderBlendOp
 #define FL_TRANSP_RESET ~(FL_IS_ALPHABLENDED | FL_IS_TRANSPARENT)
 
 // Collision flags

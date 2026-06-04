@@ -2,20 +2,42 @@
 #define _ARAMXALLOCATOR_Z_H_
 
 #include "Types_Z.h"
+#include "Memory_Z.h"
 
 template <S32 BlockCount, S32 Alignment, S32 TotalSize>
 class ARamXAllocator_Z {
 public:
     struct Block {
+        enum {
+            BLOCK_NONE,
+            BLOCK_USED
+        };
+
         S32 m_User;
         S32 m_UserParam1;
         S32 m_UserParam2;
         S32 m_StartAddress;
         S32 m_Size;
-        S32 m_InUse;
+        S32 m_Flags;
         S16 m_PrevBlockIdx;
         S16 m_NextBlockIdx;
     };
+
+    ~ARamXAllocator_Z() {
+        Shut();
+    }
+
+    void Shut() {
+        if (m_IsInitialized) {
+            if (m_StartAddress) {
+                Free_Z((void*)m_StartAddress);
+            }
+        }
+        m_StartAddress = NULL;
+        m_EndAddress = NULL;
+        m_AllocatedSize = 0;
+        m_IsInitialized = FALSE;
+    }
 
     S32 AllocBlock(S32 i_Size, S32 i_UserParam1, S32 i_UserParam2) {
         if (!i_Size) {
@@ -44,7 +66,7 @@ public:
 
             l_NewBlock->m_StartAddress = m_StartAddress;
             l_NewBlock->m_Size = l_Size;
-            l_NewBlock->m_InUse = TRUE;
+            l_NewBlock->m_Flags = Block::BLOCK_USED;
             l_NewBlock->m_UserParam1 = i_UserParam1;
             l_NewBlock->m_UserParam2 = i_UserParam2;
             l_NewBlock->m_User = -1;
@@ -72,7 +94,7 @@ public:
 
                     l_NewBlock->m_StartAddress = m_StartAddress;
                     l_NewBlock->m_Size = l_Size;
-                    l_NewBlock->m_InUse = TRUE;
+                    l_NewBlock->m_Flags = Block::BLOCK_USED;
                     l_NewBlock->m_PrevBlockIdx = -1;
                     l_NewBlock->m_NextBlockIdx = l_BlockIdx;
                     l_NewBlock->m_UserParam1 = i_UserParam1;
@@ -100,7 +122,7 @@ public:
 
                     l_NewBlock->m_StartAddress = l_FreeStart;
                     l_NewBlock->m_Size = l_Size;
-                    l_NewBlock->m_InUse = TRUE;
+                    l_NewBlock->m_Flags = Block::BLOCK_USED;
                     l_NewBlock->m_PrevBlockIdx = l_Block->m_PrevBlockIdx;
                     l_NewBlock->m_NextBlockIdx = l_BlockIdx;
                     l_NewBlock->m_UserParam1 = i_UserParam1;
@@ -130,7 +152,7 @@ public:
 
                 l_NewBlock->m_StartAddress = l_FreeStart;
                 l_NewBlock->m_Size = l_Size;
-                l_NewBlock->m_InUse = TRUE;
+                l_NewBlock->m_Flags = Block::BLOCK_USED;
                 l_NewBlock->m_PrevBlockIdx = l_BlockIdx;
                 l_NewBlock->m_NextBlockIdx = -1;
                 l_NewBlock->m_UserParam1 = i_UserParam1;

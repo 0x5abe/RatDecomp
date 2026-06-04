@@ -118,7 +118,9 @@ public:
     virtual void SetPitchRatio(Float a1, const Sound_ZHdl& a2, const Node_ZHdl& a3, BoneNode_Z* a4, S32 a5);
     virtual void SetVolumeFactor(Float i_Volume, const Sound_ZHdl& i_SoundHdl, const Node_ZHdl& i_NodeHdl, BoneNode_Z* i_BoneNode = NULL, S32 i_UnkS32 = -1);
     virtual void OpenStreamBF(const Char* a1);
-    virtual void CloseStreamBF() {}
+
+    virtual void CloseStreamBF() { }
+
     virtual void LoadStreamSound(const Char* a1);
     virtual void PlayStreamSound(const Char* a1, U32 a2, const Node_ZHdl& a3, BoneNode_Z* a4, ABC_AgentHdl a5, int a6);
     virtual void StopStreamSound(const Char* a1);

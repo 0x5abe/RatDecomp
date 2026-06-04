@@ -13,7 +13,7 @@
 #define FL_AGENT_ANIMATED_SEQ ((U32)1 << 9)            // 0x200 - It's sequenced (rtc?/animframe?)
 #define FL_AGENT_UNK_0x400 ((U32)1 << 10)              // 0x400 - Maybe skel collide
 #define FL_AGENT_CAMERA ((U32)1 << 11)                 // 0x800 - CameraAgent_Z
-#define FL_AGENT_PARTICLES ((U32)1 << 12)               // 0x1000 - ParticlesAgent_Z
+#define FL_AGENT_PARTICLES ((U32)1 << 12)              // 0x1000 - ParticlesAgent_Z
 #define FL_AGENT_RTC ((U32)1 << 13)                    // 0x2000 - RtcAgent_Z
 #define FL_AGENT_NEED_SOUND ((U32)1 << 14)             // 0x4000 - Needs sound
 #define FL_AGENT_UNK_0x8000 ((U32)1 << 15)             // 0x8000 - Unknown

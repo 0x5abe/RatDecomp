@@ -535,7 +535,7 @@ inline Vec4f operator*(Float i_Factor, const Vec4f& i_Vec) {
 struct Mat3x3 {
 public:
     union mat {
-        Float m[3][4];
+        Float m[3][4]; // 3x4 to store extra data and take advantage of alignment
 
         // Row2
         struct {
@@ -697,6 +697,14 @@ struct Mat4x4 {
 
     inline const Vec3f& GetMatrixTrans() const {
         return *(Vec3f*)(&m[3][0]);
+    }
+
+    Mat4x4& ReverseAxis() {
+        for (U32 i = 0; i < 4; i++) {
+            m[i][2] = -m[i][2];
+        }
+
+        return *this;
     }
 } Aligned_Z(16);
 

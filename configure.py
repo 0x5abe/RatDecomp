@@ -1056,7 +1056,7 @@ config.libs = [
             Object(NonMatching, "LibGC/SurfaceGCDraw_Z.cpp"),
             Object(NonMatching, "LibGC/GCRendererDraw_Z.cpp"),
             Object(NonMatching, "LibGC/GCSndStream_Z.cpp"),
-            Object(NonMatching, "LibGC/GCRenderer_Z.cpp"),
+            Object(Matching,    "LibGC/GCRenderer_Z.cpp"),
             Object(NonMatching, "LibGC/GCConsole_Z.cpp"),
             Object(NonMatching, "LibGC/WarpGCDraw_Z.cpp"),
             Object(NonMatching, "LibGC/GCSoundStreaming_Z.cpp"),

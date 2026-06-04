@@ -16,6 +16,7 @@ class DisplayList_Z : public BaseDisplayList_Z {
     U32 m_CurrSize;
     U32 m_Size;
 
+public:
     DisplayList_Z() {
         m_Data = NULL;
         m_CurrSize = 0;
@@ -34,6 +35,11 @@ class DisplayList_Z : public BaseDisplayList_Z {
     void Begin() {
         DCInvalidateRange(m_Data, m_CurrSize);
         GXBeginDisplayList(m_Data, m_CurrSize);
+    }
+
+    void Alloc(S32 i_Size, const Char* i_Comment = NULL) {
+        m_CurrSize = i_Size;
+        m_Data = (U8*)AllocAlignCL_Z(m_CurrSize, i_Comment, 64, 32);
     }
 
     U32 End() {
