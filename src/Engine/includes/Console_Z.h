@@ -171,7 +171,8 @@ public:
 
     virtual ~Console_Z();
     virtual void Init();
-    virtual Bool InitConsole();
+
+    virtual Bool InitConsole() { return FALSE; }
 
     virtual void CloseConsole() { };
 

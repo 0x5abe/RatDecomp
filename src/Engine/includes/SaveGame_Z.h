@@ -28,7 +28,9 @@ public:
 
     virtual ~SaveGame_Z();
     virtual Bool Init();
-    virtual void Shut();
+
+    virtual void Shut() { }
+
     virtual void SetGameName(Char* a1);
     virtual void SetCountry(MCCOUNTRY a1);
     virtual void SetProductNumber(Char* a1);

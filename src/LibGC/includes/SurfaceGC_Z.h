@@ -1,45 +1,66 @@
 #ifndef _SURFACEGC_Z_H_
 #define _SURFACEGC_Z_H_
-#include "DynArray_Z.h"
+#include "Surface_Z.h"
 #include "StreamList_Z.h"
 #include "ObjectCache_Z.h"
+#include "Renderer_Z.h"
+
+class SurfaceGC_Z : public Surface_Z {
+public:
+    virtual ~SurfaceGC_Z();
+    virtual void Load(void** i_Data);
+    virtual void Draw(DrawInfo_Z& i_DrawInfo, ObjectDatas_Z* i_Data);
+
+    static BaseObject_Z* NewObject() {
+        return NewL_Z(25) SurfaceGC_Z;
+    }
+
+private:
+    U8 m_Pad_0xf0[16];
+};
 
 struct SurfaceGCVertex_Z {
     U8 m_Unk_0x0[32];
 };
 
+typedef DynArray_Z<SurfaceGCVertex_Z, 8, FALSE, FALSE, 32> SurfaceGCVertex_ZDA;
+
 class SurfaceCacheGCEntry_Z : public StreamList_Z {
 public:
-    S32 m_Lod; // 0x04
+    void FreeEntry(const CacheStateFrame_Z& i_CacheState);
 
-    DynArray_Z<SurfaceGCVertex_Z, 8, FALSE, FALSE, 32> m_Vertices; // 0x08
+private:
+    S32 m_Lod;
+    DynArray_Z<SurfaceGCVertex_Z, 8, FALSE, FALSE, 32> m_Vertices;
 };
 
 typedef CacheEntryFrame_Z<SurfaceCacheGCEntry_Z, TRUE, 32> SurfaceCacheGCEntryFrame_Z;
-typedef BnkCacheEntryFrame_Z<SurfaceCacheGCEntry_Z, 128, TRUE, TRUE, 32> SurfaceCacheFrame_Z;
+typedef BnkCacheEntryFrame_Z<SurfaceCacheGCEntry_Z, 128, TRUE, TRUE, 32> SurfaceCacheBnk_Z;
+typedef BnkCacheEntryFrame_Z<SurfaceCacheGCEntry_Z, 128, TRUE, TRUE, 32>::BnkCacheEntryFrameEle_Z SurfaceCacheBnkEle_Z;
 
 class SurfaceCache_Z {
+    friend class GCRenderer_Z;
+
 public:
-    SurfaceCacheFrame_Z* GetFirstFrame() const {
-        return m_First;
+    SurfaceCache_Z() {
+        Reset();
     }
 
-    S32 GetMaxInUseNb() const {
-        return m_MaxInUseNb;
+    ~SurfaceCache_Z();
+
+    void Update() {
+        m_BnkCache.Update();
     }
 
-    void SetMaxInUseNb(S32 i_MaxInUseNb) {
-        m_MaxInUseNb = i_MaxInUseNb;
+    void GetState(CacheState_Z& o_State) {
+        o_State.Reset();
+        m_BnkCache.GetState(o_State);
     }
 
-    U16 GetTotalNb() const {
-        return m_TotalNb;
-    }
+    void Reset();
 
 private:
-    SurfaceCacheFrame_Z* m_First; // 0x00
-    U16 m_TotalNb;                // 0x04
-    S32 m_MaxInUseNb;             // 0x08
+    SurfaceCacheBnk_Z m_BnkCache;
 };
 
 #endif // _SURFACEGC_Z_H_

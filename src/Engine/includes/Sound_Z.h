@@ -21,11 +21,14 @@
 class Sound_Z : public ResourceObject_Z {
 public:
     Sound_Z();
-    void Reset();
-
     virtual void Init();
     virtual ~Sound_Z();
     virtual void Load(void** i_Data);
+    void Reset();
+
+    static BaseObject_Z* NewObject() {
+        return NewL_Z(59) Sound_Z;
+    }
 
     inline U8 GetFlag() const {
         return m_Flag;
@@ -43,7 +46,7 @@ public:
         m_Flag &= ~i_Flag;
     }
 
-private:
+protected:
     S32 m_Frequency;
     S32 m_SoundSize;
     U8 m_Flag;

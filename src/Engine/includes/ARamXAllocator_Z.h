@@ -23,6 +23,13 @@ public:
         S16 m_NextBlockIdx;
     };
 
+    ARamXAllocator_Z() {
+        m_StartAddress = 0;
+        m_EndAddress = 0;
+        m_AllocatedSize = 0;
+        m_IsInitialized = FALSE;
+    }
+
     ~ARamXAllocator_Z() {
         Shut();
     }

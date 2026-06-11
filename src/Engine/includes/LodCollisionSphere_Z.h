@@ -1,4 +1,0 @@
-#ifndef _LODCOLLISIONSPHERE_Z_H_
-#define _LODCOLLISIONSPHERE_Z_H_
-#include "Types_Z.h"
-#endif // _LODCOLLISIONSPHERE_Z_H_

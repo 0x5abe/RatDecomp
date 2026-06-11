@@ -144,6 +144,7 @@ public:
     void DoObjectsCulling(S16 i_NbRequest);
     Hdl GetLRUObjectEntry(Float i_MinUnusedTime);
     void Defragment();
+    void Minimize();
 
 protected:
     CList LinkList(CList& i_CList1, CList& i_CList2);

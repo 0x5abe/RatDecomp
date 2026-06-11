@@ -172,6 +172,9 @@ struct ScanCode_Z {
     Float m_SizeX;
     Float m_SizeY;
     Bool m_Valid;
+
+    ScanCode_Z() {
+    }
 };
 
 struct FontString_Z {
@@ -230,7 +233,19 @@ struct SortElem_Z {
 
 class GCRenderer_Z : public Renderer_Z {
 public:
-    GCRenderer_Z();
+    // TODO: Finish matching
+    GCRenderer_Z() {
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+        FIXDEBUGINLINING_Z();
+    }
 
     virtual ~GCRenderer_Z() {
         Shut();

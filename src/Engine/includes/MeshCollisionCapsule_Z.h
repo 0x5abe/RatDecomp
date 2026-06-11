@@ -1,4 +1,0 @@
-#ifndef _MESHCOLLISIONCAPSULE_Z_H_
-#define _MESHCOLLISIONCAPSULE_Z_H_
-#include "Types_Z.h"
-#endif // _MESHCOLLISIONCAPSULE_Z_H_

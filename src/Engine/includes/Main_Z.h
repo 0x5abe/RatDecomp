@@ -31,15 +31,29 @@
         }                                                                                                        \
     } while (0)
 
+#define NewMgrInitArgs_Z(mgr, class, line, ...)                                                                  \
+    do {                                                                                                         \
+        MemManager.m_FreeMemCached = s_GetFreeMem();                                                             \
+        if (!mgr) {                                                                                              \
+            mgr = NewL_Z(line) class;                                                                            \
+            if (!mgr->Init(__VA_ARGS__)) {                                                                       \
+                Console_Z::PrintBoxString("Fatal error", GetStringTabError(GetLanguage(), error_eight), #class); \
+                exit(0);                                                                                         \
+            }                                                                                                    \
+            MemManager.m_FreeMemCached = s_GetFreeMem();                                                         \
+        }                                                                                                        \
+    } while (0)
+
 ExternC_Z void memset(void* __s, S32 __c, U32 __n);
 
 // Extern Platform Functions
 
+Extern_Z void PrintMemoryStatus(Char* i_Msg);
+Extern_Z Bool EndFrame();
 Extern_Z void RegisterLowLevelClasses();
 Extern_Z void LowLevelInitProgram();
 Extern_Z void LowLevelUpdateProgram(Float i_DeltaTime);
-Extern_Z Bool EndFrame();
-Extern_Z void PrintMemoryStatus(Char* i_Msg);
+Extern_Z void LowLevelCloseProgram();
 
 // Extern Game Functions
 
@@ -131,7 +145,7 @@ struct Date_Z {
 class Globals {
 public:
     virtual ~Globals() { };
-    virtual U32 GetMgrSize(const Name_Z& i_Name, S32& i_Size1, S32& i_Size2);
+    virtual Bool GetMgrSize(const Name_Z& i_Name, S32& i_Size1, S32& i_Size2);
 
     virtual void Minimize() { }
 
@@ -166,7 +180,7 @@ public:
     SaveGame_Z* SavingMgr;
     ParticlesManager_Z* ParticlesMgr;
     void* UnkMgr_0x64;
-    SurfaceCache_Z* SurfaceCacheMgr;
+    SurfaceCache_Z* SurfaceCache;
     void* UnkMgr_0x6c;
     StreamManager_Z* StreamMgr;
     VolatileMgr_Z* VolatileMgr;
@@ -248,7 +262,7 @@ public:
         m_UnPauseRequested = FALSE;
         m_UpdatingResource = FALSE;
         m_IsPlatformAgnostic = FALSE;
-        SurfaceCacheMgr = NULL;
+        SurfaceCache = NULL;
         UnkMgr_0x64 = NULL;
         UnkMgr_0x80 = NULL;
         m_Timer = 0.0f;

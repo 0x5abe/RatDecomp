@@ -30,4 +30,10 @@ protected:
     Morpher_Z m_Morpher;
 };
 
+class PointsDatas_Z : public ObjectDatas_Z {
+public:
+    virtual ~PointsDatas_Z();
+    virtual void FreeLightCacheEntry(U16 a1);
+};
+
 #endif

@@ -10,3 +10,29 @@ symbols_known: false
 mw_comment_version: 11
 ldscript_template: config/GLLE78/ldscript.tpl
 write_asm: true
+add_relocations:
+  # GCMain_Z.cpp
+  - source: .text:0x801f5f80
+    type: ha
+    target: _db_stack_addr
+  - source: .text:0x801f5f88
+    type: ha
+    target: _db_stack_end
+  - source: .text:0x801f5f90
+    type: l
+    target: _db_stack_addr
+  - source: .text:0x801f5f94
+    type: l
+    target: _db_stack_end
+  - source: .text:0x801f6244
+    type: ha
+    target: _db_stack_addr
+  - source: .text:0x801f624c
+    type: l
+    target: _db_stack_addr
+  - source: .text:0x801f6210
+    type: ha
+    target: _db_stack_end
+  - source: .text:0x801f6218
+    type: l
+    target: _db_stack_end

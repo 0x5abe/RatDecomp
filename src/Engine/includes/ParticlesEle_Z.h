@@ -1,4 +1,11 @@
 #ifndef _PARTICLESELE_Z_H_
 #define _PARTICLESELE_Z_H_
-#include "Types_Z.h"
+#include "DynArray_Z.h"
+
+struct ParticlesEle_Z {
+    U8 m_Pad_0x0[168];
+};
+
+typedef DynArray_Z<ParticlesEle_Z, 1> ParticlesEle_ZDA;
+
 #endif // _PARTICLESELE_Z_H_

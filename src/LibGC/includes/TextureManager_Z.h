@@ -7,6 +7,7 @@
 #include "gx/GXEnum.h"
 
 class Texture_Z {
+
 public:
     GXTexObj m_Tex;
     GXTlutObj m_Tlut;
@@ -15,6 +16,8 @@ public:
     Bool m_Used;
     Bool m_Palette;
     Bool m_SecondaryPalette;
+
+    Bitmap_Z* GetBmap() { return m_Bmap; }
 };
 
 class TextureManager_Z {
@@ -25,6 +28,7 @@ public:
     void Shut(void);
     void LoadTexture(Bitmap_Z* i_Bmap, _GXTexWrapMode i_WrapS, _GXTexWrapMode i_WrapT, GXTexMapID i_TexMapID = GX_TEXMAP0);
     void RemoveTexture(U32 i_TexId);
+    void Clean();
     Bool Minimize();
     void BeginRender();
     void EndRender(S32&, S32&);

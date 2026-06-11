@@ -487,7 +487,7 @@ Date_Z Globals::GetDate() {
     return Date_Z();
 }
 
-U32 Globals::GetMgrSize(const Name_Z& i_Name, S32& i_Size1, S32& i_Size2) {
+Bool Globals::GetMgrSize(const Name_Z& i_Name, S32& i_Size1, S32& i_Size2) {
     i_Size1 = 0;
     i_Size2 = 0;
     return 0;

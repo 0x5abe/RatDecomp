@@ -4,13 +4,18 @@
 #include "Handle_Z.h"
 #include "ClassManager_Z.h"
 
+void CallBack_ResetPressed();
+Bool PrintMemStatus();
+void InitProgram(int i_Argc, Char** i_Argv);
+void ShutProgram();
+
 class GCParticlesManager_Z;
 class TextureManager_Z;
 
 class GCGlobals : public Globals {
 public:
     virtual ~GCGlobals() { };
-    virtual U32 GetMgrSize(Name_Z* l_Name, S32* a1, S32* a2);
+    virtual Bool GetMgrSize(const Name_Z& i_Name, S32& i_Size1, S32& i_Size2);
     virtual void Minimize();
 
     //U8 m_Pad_0x7E0[0x110];

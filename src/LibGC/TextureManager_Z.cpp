@@ -129,11 +129,11 @@ void TextureManager_Z::LoadTexture(Bitmap_Z* i_Bmap, _GXTexWrapMode i_WrapS, _GX
 }
 
 void TextureManager_Z::RemoveTexture(U32 i_TexId) {
-    m_TextureHA[i_TexId].m_Bmap->SetTexId(INVALID_TEXID);
+    m_TextureHA[i_TexId].GetBmap()->SetTexId((S16)INVALID_TEXID);
     m_TextureHA.Remove(i_TexId);
 }
 
-Bool TextureManager_Z::Minimize() {
+void TextureManager_Z::Clean() {
     S32 i = m_TextureHA.FindFirst();
     while (i != -1) {
         if (m_TextureHA[i].m_Used)
@@ -143,6 +143,10 @@ Bool TextureManager_Z::Minimize() {
 
         i = m_TextureHA.FindNext(i);
     }
+}
+
+Bool TextureManager_Z::Minimize() {
+    Clean();
     m_TextureHA.Minimize();
     return TRUE;
 }

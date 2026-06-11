@@ -98,7 +98,10 @@ public:
 
     virtual void Shut();
     virtual Bool Minimize();
-    virtual ~SoundManager_Z();
+
+    virtual ~SoundManager_Z() {
+    }
+
     virtual Bool Init();
     virtual void CloseFrame();
     virtual void Update(Float a1);
